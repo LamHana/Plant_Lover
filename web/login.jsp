@@ -9,9 +9,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Login Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        Input your information:
+        <form action="MainController" method="POST">
+            User ID<input type="text" name="email" required=""/> </br>
+            Password<input type="password" name="password" required=""/> </br>
+            <input type="submit" name="action" value="Login"/> </br>
+            <input type="reset" value="Reset"/> </br>
+        </form>
+                <a href="MainController?action=CreatePage">Create new user</a>
+        <%
+           String error = (String) request.getAttribute("ERROR");
+           if(error == null) error="";
+        %>
+        <%= error %>
     </body>
 </html>

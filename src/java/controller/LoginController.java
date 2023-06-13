@@ -34,9 +34,9 @@ public class LoginController extends HttpServlet {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            AccountDTO dao = new AccountDTO();
-            AccountDAO userAccount = dao.checkLogin(email, password);
-            UserDTO user = userAccount.getUserByAccountID(dao.getAccountID());
+            AccountDAO dao = new AccountDAO();
+            AccountDTO userAccount = dao.checkLogin(email, password);
+            UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
             if(userAccount == null ) {
                 request.setAttribute("ERROR", "Incorrect userID or password");
             } else {
@@ -44,10 +44,12 @@ public class LoginController extends HttpServlet {
                 HttpSession session = request.getSession();
                 if(AD.equals(roleID)) {
                     url = ADMIN_PAGE;
-                    session.setAttribute("LOGIN_USER", userAccount); //?????
+                    session.setAttribute("LOGIN_ACCOUNT", userAccount);
+                    session.setAttribute("LOGIN_USER", user);
                 } else if(US.equals(roleID)) {
                     url=USER_PAGE;
                     session.setAttribute("LOGIN_USER", userAccount);
+                    session.setAttribute("LOGIN_USER", user);
 
                 } else {
                     request.setAttribute("ERROR", "Your role is not support!");
