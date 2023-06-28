@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import utils.DBUtils;
 
 /**
@@ -16,8 +17,15 @@ import utils.DBUtils;
  * @author Hana
  */
 public class AccountDAO {
+
     private static final String LOGIN = "SELECT accountID FROM Account " + "WHERE email=? AND password=?";
+    private static final String ISEXITEMAIL = "SELECT accountID FROM Account " + "WHERE email=?";
     private static final String USER = "SELECT * FROM UserTb " + "WHERE accountID=?";
+    private static final String INSERT_ACCOUNT = "INSERT INTO Account(email,password) VALUES(?,?)";
+    private static final String INSERT_USER = "INSERT INTO UserTb (UserName, PhoneNumber, RoleID, Address, AccountID) VALUES(?,?,?,?,(SELECT MAX(AccountID) FROM Account))";
+    private static final String GET_NEW_ACCOUNTID = "SELECT TOP (1) [AccountID] FROM Account ORDER BY accountID desc";
+    private static final String CHECK_DUPLICATE = "SELECT email FROM Account WHERE email=?";
+
     public UserDTO getUserByAccountID(int accountID) throws SQLException {
         UserDTO user = null;
         Connection conn = null;
@@ -30,7 +38,7 @@ public class AccountDAO {
                 ptm.setString(1, String.valueOf(accountID));
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                    int userID = Integer.valueOf(rs.getString("userID"))  ;
+                    int userID = rs.getInt("userID");
                     String userName = rs.getString("userName");
                     String phoneNumber = rs.getString("phoneNumber");
                     String roleID = rs.getString("roleID");
@@ -52,10 +60,10 @@ public class AccountDAO {
             }
 
         }
-        
+
         return user;
     }
-    
+
     public AccountDTO checkLogin(String email, String password) throws SQLException {
         AccountDTO userAccount = null;
         Connection conn = null;
@@ -70,7 +78,7 @@ public class AccountDAO {
                 ptm.setString(2, password);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                    int accountID = Integer.valueOf(rs.getString("accountID")) ;
+                    int accountID = Integer.valueOf(rs.getString("accountID"));
                     userAccount = new AccountDTO(accountID, email, password);
                 }
             }
@@ -90,4 +98,167 @@ public class AccountDAO {
         }
         return userAccount;
     }
+
+    public AccountDTO checkIsExist(String email) throws SQLException {
+        AccountDTO userAccount = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(ISEXITEMAIL);
+                ptm.setString(1, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    int accountID = Integer.valueOf(rs.getString("accountID"));
+                    userAccount = new AccountDTO(accountID, email);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return userAccount;
+    }
+
+    public boolean checkDuplicate(String email) throws SQLException {
+       boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(CHECK_DUPLICATE);
+                ptm.setString(1, email);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    check = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+    public boolean insertAccout(AccountDTO userAccount) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(INSERT_ACCOUNT);
+                ptm.setString(1, userAccount.getEmail());
+                ptm.setString(2, userAccount.getPassword());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+    }
+            return check;
+    
+    }
+
+    public boolean insertUser(UserDTO user) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(INSERT_USER);
+                ptm.setString(1, user.getUserName());
+                ptm.setString(2, user.getPhoneNumber());
+                ptm.setString(3, user.getRoleID());
+                ptm.setString(4, user.getAddress());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+    }
+            return check;
+    }
+
+    public int getNewAccountID() throws SQLException {
+        int accountID = 0;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(GET_NEW_ACCOUNTID);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    accountID = rs.getInt("accountID");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+
+        return accountID;
+    }
+
 }

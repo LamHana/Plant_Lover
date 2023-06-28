@@ -16,10 +16,26 @@ public class AccountDTO {
 
     public AccountDTO() {
         this.accountID = 0;
-        this.Email = "";
-        this.Password = "";
+        this.Email = null;
+        this.Password = null;
+    }
+    
+    public AccountDTO(String Email, String Password) {
+        this.Email = Email;
+        this.Password = Password;
+    }
+    
+    public AccountDTO(String Email) {
+        this.Email = Email;
+        this.Password = null;
     }
 
+    public AccountDTO(int accountID, String Email) {
+        this.accountID = accountID;
+        this.Email = Email;
+        this.Password = null;
+    }
+    
     public AccountDTO(int accountID, String Email, String Password) {
         this.accountID = accountID;
         this.Email = Email;
@@ -50,6 +66,8 @@ public class AccountDTO {
     public void setPassword(String Password) {
         this.Password = Password;
     }
+
+    
 
     
     
