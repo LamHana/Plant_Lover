@@ -16,15 +16,17 @@ import model.AccountDAO;
 import model.AccountDTO;
 import model.UserDAO;
 import model.UserDTO;
-
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 /**
  *
  * @author Hana
  */
 public class LoginController extends HttpServlet {
     private static final String LOGIN_PAGE="login.jsp";
-    private static final String ADMIN_PAGE="admin.jsp";
-    private static final String USER_PAGE="user.jsp";
+    private static final String SUCCESS="admin.jsp";
     private static final String AD="AD";
     private static final String US="US";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,25 +36,17 @@ public class LoginController extends HttpServlet {
         try {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            AccountDTO dao = new AccountDTO();
-            AccountDAO userAccount = dao.checkLogin(email, password);
-            UserDTO user = userAccount.getUserByAccountID(dao.getAccountID());
+            AccountDAO dao = new AccountDAO();
+            AccountDTO userAccount = dao.checkLogin(email, password);
+            UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
             if(userAccount == null ) {
                 request.setAttribute("ERROR", "Incorrect userID or password");
             } else {
-                String roleID = user.getRoleID();
                 HttpSession session = request.getSession();
-                if(AD.equals(roleID)) {
-                    url = ADMIN_PAGE;
-                    session.setAttribute("LOGIN_USER", userAccount); //?????
-                } else if(US.equals(roleID)) {
-                    url=USER_PAGE;
-                    session.setAttribute("LOGIN_USER", userAccount);
-
-                } else {
-                    request.setAttribute("ERROR", "Your role is not support!");
+                    url = SUCCESS;
+                    session.setAttribute("LOGIN_ACCOUNT", userAccount);
+                    session.setAttribute("LOGIN_USER", user);
                 }
-            }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());
         } finally {

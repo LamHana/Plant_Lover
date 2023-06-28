@@ -3,24 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/UserGoogleDTO.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/CategoryDTO.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/AccountDTO.java</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/login.html</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/AccountDAO.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/OrderHeaderDTO.java</file>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/login.html</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/controller/MainController.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/UserDAO.java</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/ProductDAO.java</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/OrderDetailDTO.java</file>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/utils/DBUtils.java</file>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/register.jsp</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/user.jsp</file>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/controller/RegisterController.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/login.jsp</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/ProductDTO.java</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/web/admin.jsp</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/OrderHeaderDAO.java</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/OrderDetailDAO.java</file>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/UserError.java</file>
+            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/controller/LoginGoogleController.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/UserDTO.java</file>
-            <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/model/CategoryDAO.java</file>
             <file>file:/D:/FPT%20University/Subject/Semester%204/PRJ301/PLANT_LOVER/src/java/controller/LoginController.java</file>
         </group>
     </open-files>

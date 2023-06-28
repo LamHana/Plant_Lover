@@ -17,6 +17,11 @@ public class UserDTO {
     private String address;
     private int accountID;
 
+    @Override
+    public String toString() {
+        return "UserDTO{" + "userID=" + userID + ", userName=" + userName + ", phoneNumber=" + phoneNumber + ", roleID=" + roleID + ", address=" + address + ", accountID=" + accountID + '}';
+    }
+    
     public UserDTO() {
         this.userID = 0;
         this.userName = "";
@@ -25,7 +30,22 @@ public class UserDTO {
         this.address = "";
         this.accountID = 0;
     }
-
+    public UserDTO(String userName, String phoneNumber, String roleID, String address) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.roleID = roleID;
+        this.address = address;
+        this.accountID = 0;
+    }
+    
+    public UserDTO(String userName, String phoneNumber, String roleID, String address, int accountID) {
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.roleID = roleID;
+        this.address = address;
+        this.accountID = accountID;
+    }
+    
     public UserDTO(int userID, String userName, String phoneNumber, String roleID, String address, int accountID) {
         this.userID = userID;
         this.userName = userName;

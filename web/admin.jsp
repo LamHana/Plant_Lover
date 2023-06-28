@@ -4,14 +4,26 @@
     Author     : Hana
 --%>
 
+<%@page import="model.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Admin Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        Admin's information:
+        <%
+           UserDTO loginUser = (UserDTO) session.getAttribute("LOGIN_USER");
+           if(loginUser == null || !"AD".equals(loginUser.getRoleID())) {
+               response.sendRedirect("login.html");
+               return;
+           }
+         %>
+         User ID: <%= loginUser.getUserID() %> <br>
+         Full Name: <%= loginUser.getUserName()  %> <br>
+         Role ID: <%= loginUser.getRoleID()%> <br>
+         Address: <%= loginUser.getAddress() %> <br>
     </body>
 </html>
