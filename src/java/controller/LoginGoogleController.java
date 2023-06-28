@@ -5,13 +5,10 @@
  */
 package controller;
 
-import Environment.Constants;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,11 +29,8 @@ import org.apache.http.client.fluent.Form;
 public class LoginGoogleController extends HttpServlet {
 
     private static final String LOGIN_PAGE = "login.jsp";
-    private static final String ADMIN_PAGE = "admin.jsp";
-    private static final String REGISTER_CONTROLLER = "register.jsp";
-    private static final String USER_PAGE = "user.jsp";
-    private static final String AD = "AD";
-    private static final String US = "US";
+    private static final String SUCCESS = "MainController?action=product";
+    private static final String REGISTER_PAGE = "register.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,22 +47,11 @@ public class LoginGoogleController extends HttpServlet {
                 HttpSession session = request.getSession();
                 if (userAccount != null) {
                     UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
-                    String roleID = user.getRoleID();
-                    if (AD.equals(roleID)) {
-                        url = ADMIN_PAGE;
+                        url = SUCCESS;
                         session.setAttribute("LOGIN_ACCOUNT", userAccount);
                         session.setAttribute("LOGIN_USER", user);
-                    } else if (US.equals(roleID)) {
-                        url = USER_PAGE;
-                        session.setAttribute("LOGIN_ACCOUNT", userAccount);
-                        session.setAttribute("LOGIN_USER", user);
-
-                    } else {
-                        request.setAttribute("ERROR", "Your role is not support!");
-                        session.setAttribute("LOGIN_USER", user);
-                    }
                 } else {
-                    url = REGISTER_CONTROLLER;
+                    url = REGISTER_PAGE;
                     session.setAttribute("LOGIN_ACCOUNT", userGoogle);
                     session.setAttribute("LOGIN_USER", userGoogle);
                     

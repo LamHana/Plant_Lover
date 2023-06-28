@@ -26,9 +26,12 @@ public class MainController extends HttpServlet {
     private static final String REGISTER_CONTROLLER = "RegisterController";
     private static final String REGISTER_PAGE = "RegisterPage";
     private static final String REGISTER_VIEW_PAGE = "register.jsp";
-//    private static final String HOME_PAGE = "homePage";
-//    private static final String HOME_VIEW_PAGE = "home.jsp";
-    
+    private static final String PRODUCT = "product";
+    private static final String PRODUCT_CONTROLLER = "ProductController";
+    private static final String LOGOUT = "Logout";
+    private static final String LOGOUT_CONTROLLER = "LogoutController";
+    private static final String REMOVE = "Remove";
+    private static final String REMOVE_CONTROLLER = "RemoveController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,6 +49,12 @@ public class MainController extends HttpServlet {
                 url = REGISTER_CONTROLLER;
             } else if (REGISTER_PAGE.equals(action)) {
                 url = REGISTER_VIEW_PAGE;
+            } else if (PRODUCT.equals(action)) {
+                url = PRODUCT_CONTROLLER;
+            } else if (LOGOUT.equals(action)) {
+                url = LOGOUT_CONTROLLER;
+            } else if (REMOVE.equals(action)) {
+                url = REMOVE_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

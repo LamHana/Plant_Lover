@@ -7,10 +7,17 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.AccountDAO;
+import model.AccountDTO;
+import model.ProductDAO;
+import model.ProductDTO;
+import model.UserDTO;
 
 /**
  *
@@ -18,10 +25,28 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ProductController extends HttpServlet {
 
+    private static final String LOGIN_PAGE="login.jsp";
+    private static final String SUCCESS="home.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        String url = LOGIN_PAGE;
+        try {
+            ProductDAO dao = new ProductDAO();
+            List<ProductDTO> listProduct = dao.getAllProduct();
+            if(listProduct.isEmpty()) {
+                request.setAttribute("ERROR", "Don't have any product");
+            } else {
+                HttpSession session = request.getSession();
+                    url = SUCCESS;
+                    session.setAttribute("LIST_PRODUCT", listProduct);
+                }
+        } catch (Exception e) {
+            log("Error at ProductController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

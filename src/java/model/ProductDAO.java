@@ -5,10 +5,57 @@
  */
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import utils.DBUtils;
+
 /**
  *
  * @author Hana
  */
 public class ProductDAO {
+    private static final String PRODUCT = "SELECT Product.* FROM Product";
+    
+    public List<ProductDTO> getAllProduct() throws SQLException {
+       List<ProductDTO> list = new ArrayList<>();
+       Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(PRODUCT);
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int productID = rs.getInt("productID");
+                    String productName = rs.getString("productName");
+                    Double price = rs.getDouble("price");
+                    int categoryID = rs.getInt("categoryID");
+                    int quantity = rs.getInt("quantity");
+                    String desc = rs.getString("description");
+                    list.add(new ProductDTO(productID, productName, desc, price, quantity, categoryID));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+       return list;
+    }
     
 }

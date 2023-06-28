@@ -6,46 +6,45 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.AccountDAO;
-import model.AccountDTO;
-import model.UserDTO;
+
 /**
  *
  * @author Hana
  */
-public class LoginController extends HttpServlet {
-    private static final String LOGIN_PAGE="login.jsp";
-    private static final String SUCCESS="MainController?action=product";
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN_PAGE;
-        try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            AccountDAO dao = new AccountDAO();
-            AccountDTO userAccount = dao.checkLogin(email, password);
-            UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
-            if(userAccount == null ) {
-                request.setAttribute("ERROR", "Incorrect userID or password");
-            } else {
-                HttpSession session = request.getSession();
-                    url = SUCCESS;
-                    session.setAttribute("LOGIN_ACCOUNT", userAccount);
-                    session.setAttribute("LOGIN_USER", user);
-                }
-        } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
-    }
+public class RemoveController extends HttpServlet {
+
+//    private static final String ERROR = "view.jsp";
+//    private static final String SUCCESS = "view.jsp";
+//
+//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+//        String url = ERROR;
+//        try {
+//            String id = request.getParameter("id");
+//            HttpSession session = request.getSession();
+//            if (session != null) {
+//                Cart cart = (Cart) session.getAttribute("CART");
+//                if (cart != null) {
+//                    boolean check = cart.remove(id);
+//                    if (check) {
+//                        url = SUCCESS;
+//                        session.setAttribute("CART", cart);
+//                    }
+//                }
+//            }
+//
+//        } catch (Exception e) {
+//            log("Error at RemoveController: " + e.toString());
+//        } finally {
+//            request.getRequestDispatcher(url).forward(request, response);
+//        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
