@@ -20,7 +20,7 @@ import utils.DBUtils;
 public class ProductDAO {
     private static final String PRODUCT = "EXEC GetProductList ?, ?";
     private static final String REMOVE = "UPDATE Product SET isDeleted=? WHERE productID=?";
-    
+    private static final String ADD = "INSERT INTO Product (ProductName, Price, CategoryID, Description, Quantity, isDeleted) VALUES (?, ?, ?, ?, ?, 0);";
     public List<ProductDTO> getListProduct(String search, String category) throws SQLException {
        List<ProductDTO> list = new ArrayList<>();
        Connection conn = null;
@@ -93,44 +93,38 @@ public class ProductDAO {
         return check;
     }
 
-//    public List<ProductDTO> getListProductBySearch(String search) throws SQLException {
-//        List<ProductDTO> listProduct = new ArrayList<>();
-//        Connection conn = null;
-//        PreparedStatement ptm = null;
+
+    public Boolean addProduct(ProductDTO newProduct) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
 //        ResultSet rs = null;
-//        try {
-////           code 
-//            conn = DBUtils.getConnection();
-//            if (conn != null) {
-//                ptm = conn.prepareStatement(SEARCH);
-//                ptm.setString(1, "%" + search + "%");
-//                rs = ptm.executeQuery();
-//                while (rs.next()) {
-//                    int productID = rs.getInt("productID");
-//                    String productName = rs.getString("productName");
-//                    Double price = rs.getDouble("price");
-//                    int categoryID = rs.getInt("categoryID");
-//                    int quantity = rs.getInt("quantity");
-//                    String desc = rs.getString("description");
-//                    boolean isDeleted = rs.getBoolean("isDeleted");
-//                    listProduct.add(new ProductDTO(productID, productName, desc, price, quantity, categoryID, isDeleted));
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(ADD);
+                ptm.setString(1, newProduct.getProductName());
+                ptm.setDouble(2, newProduct.getPrice());
+                ptm.setInt(3, newProduct.getCategoryID());
+                ptm.setString(4, newProduct.getDescription());
+                ptm.setInt(5, newProduct.getQuantity());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
 //            if (rs != null) {
 //                rs.close();
 //            }
-//            if (ptm != null) {
-//                ptm.close();
-//            }
-//            if (conn != null) {
-//                conn.close();
-//            }
-//
-//        }
-//        return listProduct;
-//    }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+    }
+            return check;
+    }
     
 }

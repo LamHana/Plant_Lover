@@ -7,11 +7,15 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.ProductDAO;
+import model.ProductDTO;
 
 /**
  *
@@ -21,37 +25,38 @@ public class AddProductController extends HttpServlet {
 
     private static final String ERROR = "add.jsp";
     private static final String SUCCESS = "home.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        String url = ERROR;
-//        try {
-//            String  cmbLaptop = request.getParameter("cmbLaptop");
-//            String tmp[] = cmbLaptop.split("-");
-//            String id = tmp[0];
-//            String name = tmp[1];
-//            double price = Double.parseDouble(tmp[2]);
-//            int quantity = Integer.parseInt(request.getParameter("cmbQuantity"));
-//            HttpSession session = request.getSession();
-//            if(session != null) {
-//                Cart cart = (Cart) session.getAttribute("CART");
-//                if(cart == null) {
-//                    cart = new Cart();
-//                }
-//                Laptop lt = new Laptop(id, name, price, quantity);
-//                boolean check = cart.add(lt);
-//                if(check) {
-//                    url = SUCCESS;
-//                    session.setAttribute("CART", cart);
-//                    request.setAttribute("MESSAGE", quantity +" - " + name + " added");
-//                }
-//            }
-//            
-//        } catch (Exception e) {
-//           log("Error at AddController: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+        response.setContentType("text/html;charset=UTF-8");
+        String url = ERROR;
+        try {
+            String productName = request.getParameter("productName");
+            double price = Double.parseDouble(request.getParameter("price"));
+            String categoryName = request.getParameter("categoryName");
+            String description = request.getParameter("description");
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            HttpSession session = request.getSession();
+            Map<Integer, String> listCategory = (HashMap<Integer, String>) session.getAttribute("LIST_CATEGORY");
+            int categoryID = 0;
+            for (Integer key : listCategory.keySet()) {
+                if (listCategory.get(key).equalsIgnoreCase(categoryName)) {
+                    categoryID = key;
+                }
+            }
+            ProductDTO newProduct = new ProductDTO(quantity, productName, description, price, quantity, categoryID, false);
+            ProductDAO dao = new ProductDAO();
+            Boolean check = dao.addProduct(newProduct);
+                if (check) {
+                    url = SUCCESS;
+                    request.setAttribute("MESSAGE", quantity + " - " + productName + " added");
+                }
+
+        } catch (Exception e) {
+            log("Error at AddPoductController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -27,7 +27,7 @@
         </form>
             
         <c:if test="${requestScope.LIST_PRODUCT != null}">
-            <c:if test="${requestScope.LIST_CATEGORY != null}">
+            <c:if test="${sessionScope.LIST_CATEGORY != null}">
                 <table border= '1'>
                     <thead>
                         <tr>
@@ -55,7 +55,7 @@
                                         <td>
                                             <input type="text" name="price" value="${product.price}" required=""/>
                                         </td>
-                                        <td>${requestScope.LIST_CATEGORY.get(product.categoryID)}</td>
+                                        <td>${sessionScope.LIST_CATEGORY.get(product.categoryID)}</td>
                                         <td>${product.description}</td>
                                         <td>${product.quantity}</td>
                                         <!--Update day ne-->
@@ -80,6 +80,7 @@
                 </table>
             </c:if>
         </c:if>
+            <a href="MainController?action=AddPage">add</a>
         ${requestScope.ERROR}
     </body>
 </html>

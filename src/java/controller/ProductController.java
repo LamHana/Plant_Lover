@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.CategoryDAO;
 import model.ProductDAO;
 import model.ProductDTO;
@@ -39,8 +40,9 @@ public class ProductController extends HttpServlet {
                 request.setAttribute("ERROR", "Don't have any product");
             } else {
                     url = SUCCESS;
+                    HttpSession session = request.getSession();
                     request.setAttribute("LIST_PRODUCT", listProduct);
-                    request.setAttribute("LIST_CATEGORY", listCategory);
+                    session.setAttribute("LIST_CATEGORY", listCategory);
                 }
         } catch (Exception e) {
             log("Error at ProductController: " + e.toString());
