@@ -25,8 +25,16 @@
         <servlet-class>controller.LogoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteController</servlet-name>
-        <servlet-class>controller.RemoveController</servlet-class>
+        <servlet-name>RemoveProductController</servlet-name>
+        <servlet-class>controller.RemoveProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchProductController</servlet-name>
+        <servlet-class>controller.SearchProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddProductController</servlet-name>
+        <servlet-class>controller.AddProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -53,8 +61,16 @@
         <url-pattern>/LogoutController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteController</servlet-name>
-        <url-pattern>/DeleteController</url-pattern>
+        <servlet-name>RemoveProductController</servlet-name>
+        <url-pattern>/RemoveProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchProductController</servlet-name>
+        <url-pattern>/SearchProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductController</servlet-name>
+        <url-pattern>/AddProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

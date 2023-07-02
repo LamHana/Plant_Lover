@@ -12,39 +12,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.ProductDAO;
 
 /**
  *
  * @author Hana
  */
-public class RemoveController extends HttpServlet {
+public class RemoveProductController extends HttpServlet {
 
-//    private static final String ERROR = "view.jsp";
-//    private static final String SUCCESS = "view.jsp";
-//
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        String url = ERROR;
-//        try {
-//            String id = request.getParameter("id");
-//            HttpSession session = request.getSession();
-//            if (session != null) {
-//                Cart cart = (Cart) session.getAttribute("CART");
-//                if (cart != null) {
-//                    boolean check = cart.remove(id);
-//                    if (check) {
-//                        url = SUCCESS;
-//                        session.setAttribute("CART", cart);
-//                    }
-//                }
-//            }
-//
-//        } catch (Exception e) {
-//            log("Error at RemoveController: " + e.toString());
-//        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
-//        }
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "ProductController";
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+          String url = ERROR;
+        try {
+            String productID = request.getParameter("productID");
+            ProductDAO dao = new ProductDAO();
+            boolean checkDelete = dao.removeProduct(productID);
+            if(checkDelete) {
+                url = SUCCESS;
+            } else {
+                request.setAttribute("ERROR", "CAN'T DELETE");
+            }
+        } catch (Exception e) {
+            log("Error at RemoveProductController: " + e.toString());
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

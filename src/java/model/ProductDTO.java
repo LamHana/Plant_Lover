@@ -16,6 +16,7 @@ public class ProductDTO {
     private double price;
     private int quantity;
     private int categoryID;
+    private boolean isDeleted;
     
     public ProductDTO() {
         this.productID = 0;
@@ -24,15 +25,17 @@ public class ProductDTO {
         this.price = 0;
         this.quantity = 0;
         this.categoryID = 0;
+        this.isDeleted = false;
     }
 
-    public ProductDTO(int productID, String productName, String description, double price, int quantity, int categoryID) {
+    public ProductDTO(int productID, String productName, String description, double price, int quantity, int categoryID, boolean isDeleted) {
         this.productID = productID;
         this.productName = productName;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.categoryID = categoryID;
+        this.isDeleted = isDeleted;
     }
 
     public int getCategoryID() {
@@ -84,5 +87,14 @@ public class ProductDTO {
         this.quantity = quantity;
     }
 
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    
     
 }

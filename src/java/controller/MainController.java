@@ -30,8 +30,11 @@ public class MainController extends HttpServlet {
     private static final String PRODUCT_CONTROLLER = "ProductController";
     private static final String LOGOUT = "Logout";
     private static final String LOGOUT_CONTROLLER = "LogoutController";
-    private static final String REMOVE = "Remove";
-    private static final String REMOVE_CONTROLLER = "RemoveController";
+    private static final String REMOVE = "RemoveProduct";
+    private static final String REMOVE_CONTROLLER = "RemoveProductController";
+    private static final String SEARCH = "Search";
+    private static final String ADD = "Add";
+    private static final String ADD_CONTROLLER = "AddController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,6 +58,10 @@ public class MainController extends HttpServlet {
                 url = LOGOUT_CONTROLLER;
             } else if (REMOVE.equals(action)) {
                 url = REMOVE_CONTROLLER;
+            } else if (SEARCH.equals(action)) {
+                url = PRODUCT_CONTROLLER;
+            } else if (ADD.equals(action)) {
+                url = ADD_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

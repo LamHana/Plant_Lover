@@ -18,9 +18,10 @@ import utils.DBUtils;
  * @author Hana
  */
 public class ProductDAO {
-    private static final String PRODUCT = "SELECT Product.* FROM Product";
+    private static final String PRODUCT = "EXEC GetProductList ?, ?";
+    private static final String REMOVE = "UPDATE Product SET isDeleted=? WHERE productID=?";
     
-    public List<ProductDTO> getAllProduct() throws SQLException {
+    public List<ProductDTO> getListProduct(String search, String category) throws SQLException {
        List<ProductDTO> list = new ArrayList<>();
        Connection conn = null;
         PreparedStatement ptm = null;
@@ -30,6 +31,8 @@ public class ProductDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(PRODUCT);
+                ptm.setString(1, search);
+                ptm.setString(2, category);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int productID = rs.getInt("productID");
@@ -38,7 +41,8 @@ public class ProductDAO {
                     int categoryID = rs.getInt("categoryID");
                     int quantity = rs.getInt("quantity");
                     String desc = rs.getString("description");
-                    list.add(new ProductDTO(productID, productName, desc, price, quantity, categoryID));
+                    boolean isDeleted = rs.getBoolean("isDeleted");
+                    list.add(new ProductDTO(productID, productName, desc, price, quantity, categoryID, isDeleted));
                 }
             }
         } catch (Exception e) {
@@ -57,5 +61,76 @@ public class ProductDAO {
         }
        return list;
     }
+
+    public boolean removeProduct(String ProductID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(REMOVE);
+                ptm.setString(1, "True");
+                ptm.setString(2, ProductID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+
+//    public List<ProductDTO> getListProductBySearch(String search) throws SQLException {
+//        List<ProductDTO> listProduct = new ArrayList<>();
+//        Connection conn = null;
+//        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+//        try {
+////           code 
+//            conn = DBUtils.getConnection();
+//            if (conn != null) {
+//                ptm = conn.prepareStatement(SEARCH);
+//                ptm.setString(1, "%" + search + "%");
+//                rs = ptm.executeQuery();
+//                while (rs.next()) {
+//                    int productID = rs.getInt("productID");
+//                    String productName = rs.getString("productName");
+//                    Double price = rs.getDouble("price");
+//                    int categoryID = rs.getInt("categoryID");
+//                    int quantity = rs.getInt("quantity");
+//                    String desc = rs.getString("description");
+//                    boolean isDeleted = rs.getBoolean("isDeleted");
+//                    listProduct.add(new ProductDTO(productID, productName, desc, price, quantity, categoryID, isDeleted));
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+//            if (ptm != null) {
+//                ptm.close();
+//            }
+//            if (conn != null) {
+//                conn.close();
+//            }
+//
+//        }
+//        return listProduct;
+//    }
     
 }
