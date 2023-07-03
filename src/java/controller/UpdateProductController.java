@@ -7,8 +7,6 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,40 +19,29 @@ import model.ProductDTO;
  *
  * @author Hana
  */
-public class AddProductController extends HttpServlet {
+public class UpdateProductController extends HttpServlet {
 
-    private static final String ERROR = "add.jsp";
-    private static final String SUCCESS = "home.jsp";
+    private static final String ERROR = "ProductController";
+    private static final String SUCCESS = "ProductController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            int productID = Integer.parseInt(request.getParameter("productID"));
             String productName = request.getParameter("productName");
-            double price = Double.parseDouble(request.getParameter("price"));
-            String categoryName = request.getParameter("categoryName");
-            String description = request.getParameter("description");
+            Double price = Double.parseDouble(request.getParameter("price"));
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            HttpSession session = request.getSession();
-            Map<Integer, String> listCategory = (HashMap<Integer, String>) session.getAttribute("LIST_CATEGORY");
-            int categoryID = 0;
-            for (Integer key : listCategory.keySet()) {
-                if (listCategory.get(key).equalsIgnoreCase(categoryName)) {
-                    categoryID = key;
-                }
-            }
-            ProductDTO newProduct = new ProductDTO(quantity, productName, description, price, quantity, categoryID, false);
             ProductDAO dao = new ProductDAO();
-            Boolean check = dao.addProduct(newProduct);
-                if (check) {
-                    url = SUCCESS;
-                    request.setAttribute("MESSAGE", quantity + " - " + productName + " added");
-                    session.setAttribute("LIST_PRODUCT", dao.getListProduct(null, null, 1, 10));
-                }
+            ProductDTO newProduct = new ProductDTO(productID, productName, "", price, quantity, 0, false);
+            boolean checkUpdate = dao.update(newProduct);
+            if (checkUpdate) {
+                url = SUCCESS;
+            }
 
         } catch (Exception e) {
-            log("Error at AddPoductController: " + e.toString());
+            log("Error at UpdateController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

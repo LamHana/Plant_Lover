@@ -28,6 +28,7 @@ public class ProductDTO {
         this.isDeleted = false;
     }
 
+    
     public ProductDTO(int productID, String productName, String description, double price, int quantity, int categoryID, boolean isDeleted) {
         this.productID = productID;
         this.productName = productName;
@@ -93,6 +94,11 @@ public class ProductDTO {
 
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductDTO{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", categoryID=" + categoryID + ", isDeleted=" + isDeleted + '}';
     }
 
     

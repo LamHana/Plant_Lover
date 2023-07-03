@@ -34,15 +34,26 @@ public class ProductController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             CategoryDAO cateDao = new CategoryDAO();
             String search = request.getParameter("search");
-            List<ProductDTO> listProduct = dao.getListProduct(search, null);
+            String offset = request.getParameter("offset");
+            int pageOffset = 1;
+            if(offset != null) {
+                pageOffset = Integer.parseInt(offset);
+            } 
+            int pageSize = dao.getTotalProduct()/10;
+            if(pageSize % 10 !=0) {
+                pageSize++;
+            }
+            List<ProductDTO> listProduct = dao.getListProduct(search, null, pageOffset, 10);
             Map<Integer, String> listCategory = cateDao.getAllCategory();
+            
             if(listProduct.isEmpty()) {
                 request.setAttribute("ERROR", "Don't have any product");
             } else {
                     url = SUCCESS;
                     HttpSession session = request.getSession();
-                    request.setAttribute("LIST_PRODUCT", listProduct);
+                    session.setAttribute("LIST_PRODUCT", listProduct);
                     session.setAttribute("LIST_CATEGORY", listCategory);
+                    request.setAttribute("PAGE_SIZE", pageSize);
                 }
         } catch (Exception e) {
             log("Error at ProductController: " + e.toString());
