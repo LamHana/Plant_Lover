@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #94c74c;
+    --secondary-color: #000;
+    --text-color--dark: #434343;
+    --text-color--gray: #555;
+    --text-color--light: #fff;
+    --hover-color: #94c74c;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    width: 100%;
+    color: #434343;;
+}
+
+a {
+    text-decoration: none;
+}
+
+input,
+select,
+textarea,
+button {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.button-text {
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.67;
+    color: var(--text-color--light);
+}
+
+.btn-effect {
+    --border-radius: 5px;
+    --color: #ffffff;
+    --bg-color: var(--secondary-color);
+    position: sticky;
+    background-color: transparent;
+}
+
+.btn-effect:hover {
+    color: var(--color);
+}
+
+.btn-effect::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease 0.3s;
+}
+
+.btn-effect:hover::before {
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+}
+
+.btn {
+    --width: 200px;
+    --height: 55px;
+    display: inline-block;
+    min-width: var(--width);
+    height: var(--height);
+    line-height: var(--height);
+}
+
+.btn--primary {
+    color: var(--text-color--light);
+    background-color: var(--secondary-color);
+}
+
+.btn--secondary {
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn--tertiary {
+    color: #ffffff;
+    background-color: #00383c;
+    border: 1px solid #00383c;
+}
+

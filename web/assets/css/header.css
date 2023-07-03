@@ -1,0 +1,135 @@
+/* Header */
+#header {
+    position: fixed;
+    height: 86px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 54px;
+    transition: all 0.3s ease-in-out;
+    z-index: 99;
+}
+
+.header__logo {
+    margin-top: 5px;
+}
+
+/* Nav */
+.header__nav {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.header__nav a {
+    text-decoration: none;
+    height: 42px;
+    line-height: 42px;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 6px;
+}
+
+.header__nav-container {
+    display: flex;
+    margin: auto;
+}
+
+.header__nav-container li {
+    position: relative;
+    margin-left: 35px;
+    letter-spacing: 0.5px;
+    list-style-type: none;
+}
+
+.header__nav-container a {
+    color: #040c2c;
+}
+
+.header__nav-container a:hover {
+    color: var(--primary-color);
+}
+
+.header__nav-container a:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.header__nav-container .list-item::before {
+    position: absolute;
+    content: "";
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 1.3px;
+    opacity: 0.71;
+    background: var(--primary-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.list-item.active::before {
+    background: #040c2c;
+    width: 100%;
+    left: 0;
+}
+
+
+.header__nav-cart li {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-left: 35px;
+    margin: 0;
+    list-style-type: none;
+    
+}
+
+
+.header__nav-cart-info, 
+.header__nav-cart-info p{
+    margin: 0;
+}
+
+.header__nav-cart-info a, p {
+    padding: 0;
+    color: #040c2c;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1;
+}
+
+
+.header__nav-cart:hover {
+    color: var(--primary-color);
+}
+
+.header__nav-cart a:hover {
+    color: var(--primary-color);
+}
+
+.header__btn-menu {
+    display: none;
+    border: none;
+    background: inherit;
+    cursor: pointer;
+}
+
+#contact,
+#service,
+#about,
+#home {
+    position: relative;
+    z-index: -2;
+    height: auto;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.scroll-active {
+    background: rgba(255, 255, 255, .85);
+    box-shadow: 0 8px 6px -6px rgba(0, 0, 0, .4);
+    animation: 500ms ease-in-out 0s ;
+}
