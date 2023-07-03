@@ -1,0 +1,30 @@
+.footer-middle-area {
+    padding-top: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+a,
+button,
+input {
+    outline: medium none;
+    color: #434343;
+}
+
+.footer-info {
+    padding: 10px 0;
+}
+
+.icon {
+    float: left;
+    padding-top: 6px;
+    color: #abd373;
+    font-size: 24px;
+}
+
+.footer-info>p {
+    font-size: 15px;
+    line-height: 21px;
+    margin-left: 35px;
+    color: #ececec;
+    margin-bottom: 0;
+}

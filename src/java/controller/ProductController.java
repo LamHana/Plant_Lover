@@ -40,10 +40,10 @@ public class ProductController extends HttpServlet {
                 pageOffset = Integer.parseInt(offset);
             } 
             int pageSize = dao.getTotalProduct()/10;
-            if(pageSize % 10 !=0) {
+            if(pageSize % 12 !=0) {
                 pageSize++;
             }
-            List<ProductDTO> listProduct = dao.getListProduct(search, null, pageOffset, 10);
+            List<ProductDTO> listProduct = dao.getListProduct(search, null, pageOffset, 12);
             Map<Integer, String> listCategory = cateDao.getAllCategory();
             
             if(listProduct.isEmpty()) {

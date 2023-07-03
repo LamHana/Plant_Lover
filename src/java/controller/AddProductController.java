@@ -36,6 +36,7 @@ public class AddProductController extends HttpServlet {
             String categoryName = request.getParameter("categoryName");
             String description = request.getParameter("description");
             int quantity = Integer.parseInt(request.getParameter("quantity"));
+            String image = request.getParameter("image");
             HttpSession session = request.getSession();
             Map<Integer, String> listCategory = (HashMap<Integer, String>) session.getAttribute("LIST_CATEGORY");
             int categoryID = 0;
@@ -44,13 +45,13 @@ public class AddProductController extends HttpServlet {
                     categoryID = key;
                 }
             }
-            ProductDTO newProduct = new ProductDTO(quantity, productName, description, price, quantity, categoryID, false);
+            ProductDTO newProduct = new ProductDTO(quantity, productName, description, price, quantity, categoryID, false, image);
             ProductDAO dao = new ProductDAO();
             Boolean check = dao.addProduct(newProduct);
                 if (check) {
                     url = SUCCESS;
                     request.setAttribute("MESSAGE", quantity + " - " + productName + " added");
-                    session.setAttribute("LIST_PRODUCT", dao.getListProduct(null, null, 1, 10));
+                    session.setAttribute("LIST_PRODUCT", dao.getListProduct(null, null, 1, 12));
                 }
 
         } catch (Exception e) {

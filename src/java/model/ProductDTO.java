@@ -5,6 +5,7 @@
  */
 package model;
 
+
 /**
  *
  * @author Hana
@@ -17,6 +18,7 @@ public class ProductDTO {
     private int quantity;
     private int categoryID;
     private boolean isDeleted;
+    private String image;
     
     public ProductDTO() {
         this.productID = 0;
@@ -26,8 +28,8 @@ public class ProductDTO {
         this.quantity = 0;
         this.categoryID = 0;
         this.isDeleted = false;
+        this.image = null;
     }
-
     
     public ProductDTO(int productID, String productName, String description, double price, int quantity, int categoryID, boolean isDeleted) {
         this.productID = productID;
@@ -37,7 +39,28 @@ public class ProductDTO {
         this.quantity = quantity;
         this.categoryID = categoryID;
         this.isDeleted = isDeleted;
+        this.image = null;
     }
+    
+    public ProductDTO(int productID, String productName, String description, double price, int quantity, int categoryID, boolean isDeleted, String image) {
+        this.productID = productID;
+        this.productName = productName;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.categoryID = categoryID;
+        this.isDeleted = isDeleted;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String imageLink) {
+        this.image = image;
+    }
+
 
     public int getCategoryID() {
         return categoryID;
@@ -98,8 +121,10 @@ public class ProductDTO {
 
     @Override
     public String toString() {
-        return "ProductDTO{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", categoryID=" + categoryID + ", isDeleted=" + isDeleted + '}';
+        return "ProductDTO{" + "productID=" + productID + ", productName=" + productName + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", categoryID=" + categoryID + ", isDeleted=" + isDeleted + ", image=" + image + '}';
     }
+
+    
 
     
     
