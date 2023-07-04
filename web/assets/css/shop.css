@@ -253,10 +253,6 @@ ul {
     width: 42px;
 }
 
-.flex-end {
-    display: flex;
-    justify-content: flex-end;
-}
 
 .search-dropdown>form {
     background: #fff;
@@ -295,4 +291,30 @@ ul {
 
 .search-dropdown form {
     display: flex;
+}
+
+.btn {
+    height: 50px;
+}
+
+.btn-secondary {
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--text-color-dark);
+}
+
+.btn-secondary:hover, .btn-secondary:not(:disabled):not(.disabled).active,
+.btn-secondary:not(:disabled):not(.disabled):active,
+.show>.btn-secondary.dropdown-toggle  {
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-secondary.focus,
+.btn-secondary:focus {
+    box-shadow: 0 0 0 0.2rem var(--primary-color);
+}
+
+.dropdown-menu {
+    border: 1px solid var(--primary-color);
 }

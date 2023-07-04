@@ -1,6 +1,7 @@
-<%@page import="model.ProductDTO"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Map"%> <%@page import="model.CategoryDTO"%> <%@page
+import="java.util.List"%> <%@page import="model.ProductDTO"%> <%@ taglib
+prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <%@page
+contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,21 @@
       rel="stylesheet"
       href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"
     />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
     <title>Plant Lover</title>
   </head>
   <body>
@@ -207,7 +223,7 @@
             </div>
             <!--Section Title End-->
           </div>
-          <div class="row mb-3" style="display: block">
+          <div class="row mb-3 justify-content-between align-items-center">
             <div class="col-md-4 search-dropdown">
               <form action="MainController">
                 <input
@@ -217,10 +233,50 @@
                   value="${param.search}"
                   type="text"
                 />
+                <input
+                  type="hidden"
+                  name="category"
+                  value="${param.category}"
+                />
                 <button type="submit" name="action" value="Search">
                   <i class="fa fa-search"></i>
                 </button>
               </form>
+            </div>
+            <div class="col-md-2">
+              <div class="dropdown">
+                <button
+                  class="btn btn-secondary dropdown-toggle d-flex align-items-center justify-content-center"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <c:if test="${not empty param.category}">
+                    ${param.category}
+                  </c:if>
+                  <c:if test="${empty param.category}"> Category </c:if>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a
+                    class="dropdown-item"
+                    href="ProductController?category=&search=${param.search}"
+                    >All plants</a
+                  >
+                  <c:forEach
+                    var="categoryKey"
+                    varStatus="counter"
+                    items="${sessionScope.LIST_CATEGORY.keySet()}"
+                  >
+                    <a
+                      class="dropdown-item"
+                      href="ProductController?category=${sessionScope.LIST_CATEGORY.get(categoryKey)}&search=${param.search}"
+                      >${sessionScope.LIST_CATEGORY.get(categoryKey)}</a
+                    >
+                  </c:forEach>
+                </div>
+              </div>
             </div>
           </div>
           <c:if test="${sessionScope.LIST_PRODUCT != null}">
@@ -276,6 +332,9 @@
                                   >${product.price}</span
                                 >
                               </div>
+                              <div>
+                                ${sessionScope.LIST_CATEGORY.get(product.categoryID)}
+                              </div>
                               <div class="add-to-cart">
                                 <a href="#">Add To Cart</a>
                               </div>
@@ -290,16 +349,52 @@
               </div>
             </c:if>
           </c:if>
+          <c:if test="${sessionScope.LIST_PRODUCT == null}">
+            <div>Empty</div>
+          </c:if>
           <!--Pagination Start-->
           <div class="product-pagination">
             <ul>
               <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
-                <li class="">
-                  <a href="ProductController?offset=${i}">${i}</a>
-                </li>
+                  <c:if test="${param.offset != null}">
+                    <c:if test="${param.offset == i}">
+                      <li class="product-pagination__page active">
+                        <a
+                          href="ProductController?offset=${i}&search=${param.search}&category=${param.category}"
+                          >${i}</a
+                        >
+                      </li>
+                    </c:if>
+                      <c:if test="${param.offset != i}">
+                      <li class="product-pagination__page">
+                        <a
+                          href="ProductController?offset=${i}&search=${param.search}&category=${param.category}"
+                          >${i}</a
+                        >
+                      </li>
+                    </c:if>
+                  </c:if>
+                    <c:if test="${param.offset == null}">
+                        <c:if test="${i == 1}">
+                            <li class="product-pagination__page active">
+                            <a
+                              href="ProductController?offset=${i}&search=${param.search}&category=${param.category}"
+                              >${i}</a
+                            >
+                          </li>
+                        </c:if>
+                           <c:if test="${i != 1}">
+                            <li class="product-pagination__page">
+                            <a
+                              href="ProductController?offset=${i}&search=${param.search}&category=${param.category}"
+                              >${i}</a
+                            >
+                          </li>
+                        </c:if>
+                    </c:if>
               </c:forEach>
               <li>
-                <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                <a href="ProductController?offset=${param.offset != null ? (param.offset == requestScope.PAGE_SIZE ? 1: param.offset+1) : 2}&search=${param.search}&category=${param.category}"><i class="fa fa-angle-double-right"></i></a>
               </li>
             </ul>
           </div>
@@ -335,10 +430,7 @@
                     <div class="icon">
                       <i class="fa fa-home"></i>
                     </div>
-                    <p>
-                      Address : No 40 Baria Sreet 15/2 NewYork City, NY, United
-                      States.
-                    </p>
+                    <p>Address : S10.06 Vinhome Grand Park, HCM City.</p>
                   </div>
                 </div>
                 <!--Single Footer Widget End-->
@@ -350,7 +442,7 @@
                     <div class="icon">
                       <i class="fa fa-envelope-open-o"></i>
                     </div>
-                    <p>Email: <br />info@yourmail.com</p>
+                    <p>Email: <br />lamtngochan@gmail.com</p>
                   </div>
                 </div>
                 <!--Single Footer Widget End-->
@@ -362,7 +454,7 @@
                     <div class="icon">
                       <i class="fa fa-mobile"></i>
                     </div>
-                    <p>Phone: <br />(+68) 123 456 7890</p>
+                    <p>Phone: <br />(+84) 786 981 691</p>
                   </div>
                 </div>
                 <!--Single Footer Widget End-->
@@ -375,6 +467,5 @@
     </footer>
     <!-- Footer section end -->
   </body>
-    <script src="./assets/js/header.js"></script>
-
+  <script src="./assets/js/header.js"></script>
 </html>
