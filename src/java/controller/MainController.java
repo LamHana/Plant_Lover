@@ -41,7 +41,10 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CONTROLLER = "UpdateProductController";
     private static final String DETAIL = "Detail";
     private static final String DETAIL_CONTROLLER = "DetailController";
-    
+    private static final String ADD_CART = "AddCart";
+    private static final String ADD_CART_CONTROLLER = "AddCartController";
+    private static final String CHECKOUT = "Checkout";
+    private static final String CHECKOUT_CONTROLLER = "CheckoutController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -74,7 +77,10 @@ public class MainController extends HttpServlet {
                 url = UPDATE_CONTROLLER;
             } else if (DETAIL.equals(action)) {
                 url = DETAIL_CONTROLLER;
-;
+            } else if (ADD_CART.equals(action)) {
+                url = ADD_CART_CONTROLLER;
+            } else if (CHECKOUT.equals(action)) {
+                url = CHECKOUT_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

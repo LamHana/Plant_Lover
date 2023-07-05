@@ -33,7 +33,7 @@ public class DetailController extends HttpServlet {
         try {
             String productID = request.getParameter("productID");
             ProductDAO dao = new ProductDAO();
-            ProductDTO product = dao.getProductDetail(productID);
+            ProductDTO product = dao.getProductDetail(Integer.parseInt(productID));
                 if (product != null) {
                     url = SUCCESS;
                     request.setAttribute("PRODUCT", product );

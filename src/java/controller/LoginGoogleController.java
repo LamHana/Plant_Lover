@@ -17,6 +17,7 @@ import Environment.Constants;
 import javax.servlet.http.HttpSession;
 import model.AccountDAO;
 import model.AccountDTO;
+import model.Cart;
 import model.UserGoogleDTO;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
@@ -31,6 +32,7 @@ public class LoginGoogleController extends HttpServlet {
     private static final String LOGIN_PAGE = "login.jsp";
     private static final String SUCCESS = "MainController?action=product";
     private static final String REGISTER_PAGE = "register.jsp";
+    private static final String VIEW_CART = "cart.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,15 +48,24 @@ public class LoginGoogleController extends HttpServlet {
                 AccountDTO userAccount = dao.checkIsExist(userGoogle.getEmail());
                 HttpSession session = request.getSession();
                 if (userAccount != null) {
+                    Cart cart = (Cart) session.getAttribute("CART");
                     UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
+                    if (cart != null) {
+                        url = VIEW_CART;
+                        session.setAttribute("LOGIN_ACCOUNT", userAccount);
+                        session.setAttribute("LOGIN_USER", user);
+                        request.getRequestDispatcher(url).forward(request, response);
+                        return;
+                    } else {
                         url = SUCCESS;
                         session.setAttribute("LOGIN_ACCOUNT", userAccount);
                         session.setAttribute("LOGIN_USER", user);
+                    }
                 } else {
                     url = REGISTER_PAGE;
                     session.setAttribute("LOGIN_ACCOUNT", userGoogle);
                     session.setAttribute("LOGIN_USER", userGoogle);
-                    
+
                 }
             }
         } catch (Exception e) {

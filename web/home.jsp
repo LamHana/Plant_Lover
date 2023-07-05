@@ -298,7 +298,7 @@ contentType="text/html" pageEncoding="UTF-8"%>
                                 ${sessionScope.LIST_CATEGORY.get(product.categoryID)}
                               </div>
                               <div class="add-to-cart">
-                                <a href="#">Add To Cart</a>
+                                <a href="MainController?action=Detail&productID=${product.productID}">Add To Cart</a>
                               </div>
                             </div>
                           </div>

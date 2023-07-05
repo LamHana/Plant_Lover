@@ -22,68 +22,86 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <li id="header__nav-cart">
         <div class="mini-cart">
           <a href="#">
-            <span class="cart-icon">
-              <span class="cart-quantity">2</span>
-            </span>
-            <span class="cart-title"
-              >Your cart <br /><strong>$190.00</strong></span
-            >
+            <c:if test="${sessionScope.CART != null}">
+              <c:forEach
+                var="product"
+                varStatus="counter"
+                items="${sessionScope.CART.getCart().values()}"
+              >
+                <c:set
+                  var="total"
+                  value="${total + (product.quantity * product.price)}"
+                  scope="page"
+                />
+              </c:forEach>
+              <span class="cart-icon">
+                <span class="cart-quantity">${sessionScope.CART.size()}</span>
+              </span>
+              <span class="cart-title"
+                >Your cart <br /><strong>${pageScope.total}$</strong></span
+              >
+            </c:if>
+            <c:if test="${sessionScope.CART == null}">
+              <span class="cart-icon">
+                <span class="cart-quantity">0</span>
+              </span>
+              <span class="cart-title"
+                >Your cart <br /><strong>$0</strong></span
+              >
+            </c:if>
           </a>
           <!--Cart Dropdown Start-->
-          <div
-            class="cart-dropdown hidden"
-            style="
-              height: 443.2px;
-              padding-top: 30px;
-              margin-top: 0px;
-              padding-bottom: 15px;
-              margin-bottom: 0px;
-              display: none;
-            "
-          >
-            <ul>
-              <li class="single-cart-item">
-                <div class="cart-img">
-                  <a href="single-product.html"
-                    ><img src="img/cart/cart1.jpg" alt=""
-                  /></a>
-                </div>
-                <div class="cart-content">
-                  <h5 class="product-name">
-                    <a href="single-product.html">Odio tortor consequat</a>
-                  </h5>
-                  <span class="cart-price">1 × $90.00</span>
-                </div>
-                <div class="cart-remove">
-                  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
-                </div>
-              </li>
-              <li class="single-cart-item">
-                <div class="cart-img">
-                  <a href="single-product.html"
-                    ><img src="img/cart/cart2.jpg" alt=""
-                  /></a>
-                </div>
-                <div class="cart-content">
-                  <h5 class="product-name">
-                    <a href="single-product.html">Auctor sem</a>
-                  </h5>
-                  <span class="cart-price">1 × $100.00</span>
-                </div>
-                <div class="cart-remove">
-                  <a title="Remove" href="#"><i class="fa fa-times"></i></a>
-                </div>
-              </li>
-            </ul>
-            <p class="cart-subtotal">
-              <strong>Subtotal:</strong>
-              <span class="float-right">$190.00</span>
-            </p>
-            <p class="cart-btn">
-              <a href="cart.html">View cart</a>
-              <a href="checkout.html">Checkout</a>
-            </p>
-          </div>
+          <c:if test="${sessionScope.CART != null}">
+            <div
+              class="cart-dropdown hidden"
+              style="
+                padding-top: 30px;
+                margin-top: 0px;
+                padding-bottom: 15px;
+                margin-bottom: 0px;
+                display: none;
+              "
+            >
+              <c:forEach
+                var="product"
+                varStatus="counter"
+                items="${sessionScope.CART.getCart().values()}"
+              >
+                <ul>
+                  <li class="single-cart-item">
+                    <div class="cart-img">
+                      <a
+                        href="MainController?action=Detail&productID=${product.productID}"
+                        ><img src="${product.image}" alt=""
+                      /></a>
+                    </div>
+                    <div class="cart-content">
+                      <h5 class="product-name">
+                        <a
+                          href="MainController?action=Detail&productID=${product.productID}"
+                          >${product.productName}</a
+                        >
+                      </h5>
+                      <span class="cart-price"
+                        >${product.quantity} × $${product.price}</span
+                      >
+                    </div>
+                    <div class="cart-remove">
+                      <a title="Remove" href="#"><i class="fa fa-times"></i></a>
+                    </div>
+                  </li>
+                </ul>
+              </c:forEach>
+              <p class="cart-subtotal">
+                <strong>Subtotal:</strong>
+                <span class="float-right">${pageScope.total}$</span>
+              </p>
+              <p class="cart-btn">
+                <a href="MainController?action=checkout">View cart</a>
+                <a href="checkout.html">Checkout</a>
+              </p>
+            </div>
+          </c:if>
           <!--Cart Dropdown End-->
         </div>
       </li>

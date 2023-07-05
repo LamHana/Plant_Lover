@@ -6,52 +6,51 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.AccountDAO;
-import model.AccountDTO;
 import model.Cart;
-import model.UserDTO;
+import model.ProductDAO;
+import model.ProductDTO;
+
 /**
  *
  * @author Hana
  */
-public class LoginController extends HttpServlet {
-    private static final String LOGIN_PAGE="login.jsp";
-    private static final String SUCCESS="MainController?action=product";
-    private static final String VIEW_CART="cart.jsp";
+public class AddCartController extends HttpServlet {
+
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "home.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN_PAGE;
+        String url = ERROR;
         try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            AccountDAO dao = new AccountDAO();
-            AccountDTO userAccount = dao.checkLogin(email, password);
-            UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
+            ProductDAO dao = new ProductDAO();
+            int  productID = Integer.parseInt(request.getParameter("productID"));
+            double price = Double.parseDouble(request.getParameter("price"));
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
             HttpSession session = request.getSession();
-            if(userAccount == null ) {
-                request.setAttribute("ERROR", "Incorrect userID or password");
-            } else {
+            if(session != null) {
                 Cart cart = (Cart) session.getAttribute("CART");
-                if(cart != null) {
-                    url = VIEW_CART;
-                    session.setAttribute("LOGIN_ACCOUNT", userAccount); 
-                    session.setAttribute("LOGIN_USER", user);
-                    request.getRequestDispatcher(url).forward(request, response);
-                    return;
-                } else {
+                if(cart == null) {
+                    cart = new Cart();
+                }
+                ProductDTO product = dao.getProductDetail(productID);   
+                ProductDTO orderProduct = new ProductDTO(productID, product.getProductName(), product.getDescription(), price, quantity, product.getCategoryID(), false, product.getImage());
+                boolean check = cart.add(orderProduct);
+                if(check) {
                     url = SUCCESS;
-                    session.setAttribute("LOGIN_ACCOUNT", userAccount);
-                    session.setAttribute("LOGIN_USER", user);
+                    session.setAttribute("CART", cart);
+                    request.setAttribute("MESSAGE", quantity +" - " + product.getProductName() + " added");
                 }
             }
+            
         } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
+           log("Error at AddCartController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

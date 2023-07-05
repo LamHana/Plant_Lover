@@ -168,7 +168,7 @@ public class ProductDAO {
 
 
 
-    public ProductDTO getProductDetail(String productID) throws SQLException {
+    public ProductDTO getProductDetail(int productID) throws SQLException {
         ProductDTO product = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -178,7 +178,7 @@ public class ProductDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SINGLE_PRODUCT);
-                ptm.setString(1, productID);
+                ptm.setString(1, String.valueOf(productID));
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     int singleProductID = rs.getInt("productID");

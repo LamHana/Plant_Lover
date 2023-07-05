@@ -6,52 +6,54 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.AccountDAO;
 import model.AccountDTO;
 import model.Cart;
-import model.UserDTO;
+import model.CartDAO;
+
 /**
  *
  * @author Hana
  */
-public class LoginController extends HttpServlet {
-    private static final String LOGIN_PAGE="login.jsp";
-    private static final String SUCCESS="MainController?action=product";
-    private static final String VIEW_CART="cart.jsp";
+public class CheckoutController extends HttpServlet {
+
+    private static final String ERROR = "home.jsp";
+    private static final String SUCCESS = "cart.jsp";
+    private static final String LOGIN_PAGE= "login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN_PAGE;
-        try {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            AccountDAO dao = new AccountDAO();
-            AccountDTO userAccount = dao.checkLogin(email, password);
-            UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
+        String url = ERROR;
+       try {
             HttpSession session = request.getSession();
-            if(userAccount == null ) {
-                request.setAttribute("ERROR", "Incorrect userID or password");
-            } else {
-                Cart cart = (Cart) session.getAttribute("CART");
-                if(cart != null) {
-                    url = VIEW_CART;
-                    session.setAttribute("LOGIN_ACCOUNT", userAccount); 
-                    session.setAttribute("LOGIN_USER", user);
-                    request.getRequestDispatcher(url).forward(request, response);
-                    return;
-                } else {
-                    url = SUCCESS;
-                    session.setAttribute("LOGIN_ACCOUNT", userAccount);
-                    session.setAttribute("LOGIN_USER", user);
-                }
+            if (session != null) {
+                AccountDTO loginAccount = (AccountDTO) session.getAttribute("LOGIN_ACCOUNT"); 
+                    Cart cart = (Cart) session.getAttribute("CART");
+                    if (cart != null) {
+                        CartDAO dao = new CartDAO();
+                        Map<Integer, String> checkQuantityMessage = dao.checkQuantity(cart);
+                        if (checkQuantityMessage.isEmpty()) {
+                            session.setAttribute("CART", cart);
+                            if(loginAccount != null) {
+                                 url = SUCCESS;
+                             } else {
+                                  url = LOGIN_PAGE;
+                            }
+                        } else {
+                            request.setAttribute("QUANTITY_MESSAGE", checkQuantityMessage);
+                        }
+                    }
+                
             }
+
         } catch (Exception e) {
-            log("Error at LoginController: " + e.toString());
+            log("Error at CheckoutController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
