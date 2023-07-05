@@ -23,7 +23,7 @@ public class ProductDAO {
     private static final String REMOVE = "UPDATE Product SET isDeleted=? WHERE productID=?";
     private static final String ADD = "INSERT INTO Product (ProductName, Price, CategoryID, Description, Quantity, isDeleted, Image) VALUES (?, ?, ?, ?, ?, 0, ?)";
     private static final String UPDATE = "UPDATE Product SET ProductName = ?,Price = ?,Quantity = ?, Image = ? WHERE ProductID = ?";
-    private static final String TOTAL = "SELECT COUNT(*) FROM Product WHERE isDeleted != 1";
+    private static final String SINGLE_PRODUCT = "SELECT * FROM Product WHERE productID=?";
     public List<ProductDTO> getListProduct(String search, String category, int offset, int size) throws SQLException {
         List<ProductDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -166,7 +166,10 @@ public class ProductDAO {
         return check;
     }
 
-    public int getTotalProduct() throws SQLException {
+
+
+    public ProductDTO getProductDetail(String productID) throws SQLException {
+        ProductDTO product = null;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -174,10 +177,19 @@ public class ProductDAO {
 //           code 
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement(TOTAL);
+                ptm = conn.prepareStatement(SINGLE_PRODUCT);
+                ptm.setString(1, productID);
                 rs = ptm.executeQuery();
-                while (rs.next()) {
-                    return rs.getInt(1);
+                if (rs.next()) {
+                    int singleProductID = rs.getInt("productID");
+                    String productName = rs.getString("productName");
+                    Double price = rs.getDouble("price");
+                    int categoryID = rs.getInt("categoryID");
+                    int quantity = rs.getInt("quantity");
+                    String desc = rs.getString("description");
+                    boolean isDeleted = rs.getBoolean("isDeleted");
+                    String image = rs.getString("Image");
+                    product = new ProductDTO(singleProductID, productName, desc, price, quantity, categoryID, isDeleted, image);
                 }
             }
         } catch (Exception e) {
@@ -194,10 +206,10 @@ public class ProductDAO {
             }
 
         }
-        return 0;
+        return product;
     }
-
-    public static void main(String[] args) throws SQLException {
+    
+      public static void main(String[] args) throws SQLException {
         ProductDAO dao = new ProductDAO();
         List<ProductDTO> list = dao.getListProduct(null, null, 2, 10);
         for (ProductDTO productDTO : list) {

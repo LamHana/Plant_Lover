@@ -73,41 +73,60 @@
     left: 0;
 }
 
-
-.header__nav-cart li {
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-left: 35px;
-    margin: 0;
+.header__nav-cart {
     list-style-type: none;
-    
 }
 
-
-.header__nav-cart-info, 
-.header__nav-cart-info p{
-    margin: 0;
+.mini-cart>a {
+    color: #000;
+    position: relative;
+    padding-left: 35px;
+    display: block;
 }
 
-.header__nav-cart-info a, p {
-    padding: 0;
-    color: #040c2c;
+.cart-icon {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.cart-icon:before {
+    content: '\f07a';
+    font-family: FontAwesome;
+    line-height: 1;
+    font-size: 18px;
+}
+
+.cart-quantity {
+    position: absolute;
+    background: #abd373;
+    height: 19px;
+    line-height: 19px;
+    width: 19px;
+    text-align: center;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 12px;
+    left: 12px;
+    top: -6px;
+    z-index: 1;
+}
+
+.cart-title {
+    display: block;
     font-size: 13px;
     font-weight: 500;
     text-align: left;
     line-height: 1;
 }
 
-
-#header__nav-cart:hover {
-    color: var(--primary-color);
+.cart-title>strong {
+    display: block;
+    font-weight: 500;
+    margin-top: 6px;
 }
 
-.header__nav-cart-info:hover {
-    color: var(--primary-color);
-}
 
 .header__btn-menu {
     display: none;
@@ -115,6 +134,150 @@
     background: inherit;
     cursor: pointer;
 }
+
+.cart-dropdown {
+    text-align: left;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 360px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    padding: 30px 25px 15px 25px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.hidden {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.mini-cart-search>div {
+    margin-right: 35px;
+}
+
+.cart-dropdown ul>li {
+    display: block;
+    list-style: none;
+    overflow: hidden;
+    padding: 0 0 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.cart-img {
+    float: left;
+    width: 25%;
+}
+
+.cart-img>a {
+    display: block;
+    border: 1px solid #ededed;
+}
+
+.cart-img img {
+    width: 100%;
+}
+
+.cart-content {
+    float: left;
+    width: 62%;
+    margin-left: 20px;
+}
+
+.product-name {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    margin: 0 30px 5px 0;
+    text-align: left;
+}
+
+.cart-content span.cart-price {
+    display: block;
+    margin-top: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+    line-height: 21px;
+}
+
+
+.cart-remove {
+    position: relative;
+}
+
+.cart-remove>a {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    z-index: 1;
+}
+
+.cart-dropdown ul>li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.cart-subtotal {
+    border-top: 1px solid #e5e5e5;
+    color: #555;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 40px;
+    padding: 15px 0;
+    text-align: left;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.cart-subtotal>strong {
+    font-weight: 400;
+}
+
+.cart-btn {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 25px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.cart-btn a {
+    background: #fff;
+    color: #555;
+    border: 2px solid #e5e5e5;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    height: 50px;
+    line-height: 48px;
+    padding: 0;
+    margin: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 125px;
+    border-radius: 3px;
+}
+
+.mini-cart:hover>a {
+    color: #abd373;
+}
+
+.cart-img>a:hover {
+    border-color: #abd373;
+}
+
+.cart-btn a:hover {
+    background: #abd373;
+    border-color: #abd373;
+    color: #fff;
+}
+
 
 #contact,
 #service,
@@ -131,8 +294,5 @@
 .scroll-active {
     background: rgba(255, 255, 255, .85);
     box-shadow: 0 8px 6px -6px rgba(0, 0, 0, .4);
-    animation: 500ms ease-in-out 0s ;
+    animation: 500ms ease-in-out 0s;
 }
-
-
-

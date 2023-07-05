@@ -5,13 +5,9 @@
     padding: 50px 35px;
     background-color: #fff;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
-    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
 
@@ -31,8 +27,6 @@
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .feature-content>h3 {
@@ -54,23 +48,19 @@
 
 @keyframes crFlipX {
     0% {
-        -webkit-transform: rotateY(0);
         transform: rotateY(0);
     }
 
     50% {
-        -webkit-transform: rotateY(180deg);
         transform: rotateY(180deg);
     }
 
     100% {
-        -webkit-transform: rotateY(360deg);
         transform: rotateY(360deg);
     }
 }
 
 .single-feature:hover .feature-icon>span {
-    -webkit-animation: crFlipX 2s ease-in-out infinite backwards;
     animation: crFlipX 2s ease-in-out infinite backwards;
 }
 

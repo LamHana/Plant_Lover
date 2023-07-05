@@ -117,6 +117,18 @@ button {
 .mb-30 {
     margin-bottom: 30px;
 }
+
+.mb-100 {
+    margin-bottom: 100px;
+}
+
+.mb-115 {
+    margin-bottom: 115px;
+}
+
+.mb-120 {
+    margin-bottom: 120px;
+}
 .black-bg {
     background: #000000 !important;
 }

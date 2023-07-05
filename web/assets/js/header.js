@@ -7,3 +7,23 @@ const transitionNavBar = () => {
   }
 };
 window.addEventListener("scroll", transitionNavBar);
+
+var cartDropdown = document.querySelector(".cart-dropdown");
+var miniCart = document.querySelector(".mini-cart");
+const dropdownCartShow = () => {
+  console.log("2");
+  var op = 0.5; // initial opacity
+  cartDropdown.classList.remove("hidden");
+  cartDropdown.style.cssText =
+    "height: 443.2px; padding-top: 30px; margin-top: 0px; padding-bottom: 15px; margin-bottom: 0px; ";
+};
+
+const dropdownCart = () => {
+  console.log("1");
+  cartDropdown.classList.add("hidden");
+  cartDropdown.style.cssText =
+    "height: 443.2px; padding-top: 30px; margin-top: 0px; padding-bottom: 15px; margin-bottom: 0px; display:none";
+};
+
+miniCart.addEventListener("mouseover", dropdownCartShow);
+cartDropdown.addEventListener("mouseout", dropdownCart);

@@ -39,6 +39,8 @@ public class MainController extends HttpServlet {
     private static final String ADD_CONTROLLER = "AddProductController";
     private static final String UPDATE = "Update";
     private static final String UPDATE_CONTROLLER = "UpdateProductController";
+    private static final String DETAIL = "Detail";
+    private static final String DETAIL_CONTROLLER = "DetailController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,6 +72,9 @@ public class MainController extends HttpServlet {
                 url = ADD_PAGE_VIEW;
             } else if (UPDATE.equals(action)) {
                 url = UPDATE_CONTROLLER;
+            } else if (DETAIL.equals(action)) {
+                url = DETAIL_CONTROLLER;
+;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());
