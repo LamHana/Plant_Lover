@@ -37,8 +37,22 @@ public class MainController extends HttpServlet {
     private static final String ADD_PAGE_VIEW = "add.jsp";
     private static final String ADD = "Add";
     private static final String ADD_CONTROLLER = "AddProductController";
-    private static final String UPDATE = "Update";
-    private static final String UPDATE_CONTROLLER = "UpdateProductController";
+    private static final String UPDATE_PRODUCT = "UpdateProduct";
+    private static final String UPDATE_PRODUCT_CONTROLLER = "UpdateProductController";
+    private static final String DETAIL = "Detail";
+    private static final String DETAIL_CONTROLLER = "DetailController";
+    private static final String ADD_CART = "AddCart";
+    private static final String ADD_CART_CONTROLLER = "AddCartController";
+    private static final String CHECKOUT = "Checkout";
+    private static final String CHECKOUT_CONTROLLER = "CheckoutController";
+    private static final String PLACE_ORDER = "Place order";
+    private static final String PLACE_ORDER_CONTROLLER = "OrderController";
+    private static final String ORDER = "Order";
+    private static final String ORDER_VIEW = "checkout.jsp";
+    private static final String UPDATE_CART = "Update";
+    private static final String UPDATE_CART_CONTROLLER = "UpdateCartController";
+    private static final String REMOVE_CART = "RemoveCart";
+    private static final String REMOVE_CART_CONTROLLER = "RemoveCartController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -68,8 +82,22 @@ public class MainController extends HttpServlet {
                 url = ADD_CONTROLLER;
             } else if (ADD_PAGE.equals(action)) {
                 url = ADD_PAGE_VIEW;
-            } else if (UPDATE.equals(action)) {
-                url = UPDATE_CONTROLLER;
+            } else if (UPDATE_PRODUCT.equals(action)) {
+                url = UPDATE_PRODUCT_CONTROLLER;
+            } else if (DETAIL.equals(action)) {
+                url = DETAIL_CONTROLLER;
+            } else if (ADD_CART.equals(action)) {
+                url = ADD_CART_CONTROLLER;
+            } else if (CHECKOUT.equals(action)) {
+                url = CHECKOUT_CONTROLLER;
+            } else if (PLACE_ORDER.equals(action)) {
+                url = PLACE_ORDER_CONTROLLER;
+            } else if (ORDER.equals(action)) {
+                url = ORDER_VIEW;
+            } else if (UPDATE_CART.equals(action)) {
+                url = UPDATE_CART_CONTROLLER;
+            } else if (REMOVE_CART.equals(action)) {
+                url = REMOVE_CART_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

@@ -1,0 +1,82 @@
+.dec-and-review-menu {
+  justify-content: center;
+}
+
+.dec-and-review-menu > li {
+  list-style: none;
+  position: relative;
+  z-index: 9;
+  display: inline-block;
+  margin: 0 50px 0 0;
+}
+
+.dec-and-review-menu > li > a {
+  font-size: 18px;
+  color: #000;
+  font-weight: 500;
+  text-transform: capitalize;
+  line-height: 25px;
+  display: block;
+  padding: 0 0 10px 0;
+  position: relative;
+}
+
+.dec-and-review-menu > li > a.active,
+.dec-and-review-menu > li > a:hover {
+  color: #000;
+}
+
+.dec-and-review-menu > li:hover > a:after,
+.dec-and-review-menu > li > a.active:after {
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.dec-and-review-menu > li > a:after {
+  background: #abd373;
+  bottom: -1px;
+  content: "";
+  display: block;
+  height: 1px;
+  left: 50%;
+  position: absolute;
+  right: 50%;
+  width: 0;
+  transition: all 0.3s ease;
+}
+
+.product-review-content-tab {
+  border-top: 1px solid #e5e5e5;
+  box-shadow: none;
+  float: left;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+  min-height: 160px;
+  padding: 0;
+  padding: 45px 0px 0 0;
+  width: 100%;
+}
+
+.tab-content .tab-pane.active {
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+  overflow: visible;
+}
+
+.tab-content .tab-pane {
+  display: block;
+  height: 0;
+  max-width: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  opacity: 0;
+}
+.single-product-description > p {
+  font-size: 14px;
+  line-height: 28px;
+  color: #666;
+}
+

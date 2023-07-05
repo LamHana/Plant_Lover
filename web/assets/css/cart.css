@@ -1,0 +1,204 @@
+.breadcrumb-tow {
+    background-color: #f4f4f4;
+    padding: 55px 0 50px 0;
+}
+
+.breadcrumb-title>h1 {
+    font-size: 50px;
+    text-align: center;
+    color: #000;
+    text-transform: capitalize;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.breadcrumb-content.breadcrumb-content-tow {
+    position: static;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+
+.breadcrumb-content>ul>li {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 25px;
+    color: #fff;
+    position: relative;
+}
+
+.breadcrumb-content-tow>ul>li>a {
+    color: #666;
+}
+
+
+.breadcrumb-content-tow>ul>li:before {
+    background-color: #666;
+}
+
+.table-content table {
+    background: #fff none repeat scroll 0 0;
+    border-color: #ebebeb;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+thead {
+    background-color: #f6f6f6;
+}
+
+.table-content table th {
+    border-top: medium none;
+    font-size: 15px;
+    text-transform: capitalize;
+    padding: 20px 10px;
+    text-align: center;
+    font-weight: 500;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table-content table th,
+.table-content table td {
+    border-bottom: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+}
+
+.table-content table td.plantmore-product-remove {
+    font-size: 20px;
+}
+
+.table-content table td {
+    border-top: medium none;
+    padding: 20px 10px;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+.table-content table td.plantmore-product-price {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.plantmore-product-thumbnail a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plantmore-product-thumbnail img {
+    width: 90px;
+    height: 90px;
+}
+
+.table-content table td.plantmore-product-name {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.table-content table td.product-subtotal {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    color: #414141;
+}
+
+.table-content table td.plantmore-product-price {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.plantmore-product-quantity input {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 55px;
+}
+
+.product-update input.button {
+    background-color: #333;
+    border: 0 none;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    letter-spacing: 1px;
+    line-height: 42px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out 0s;
+    width: inherit;
+}
+
+
+.cart-page-total {
+    padding-top: 50px;
+}
+
+
+.cart-page-total>h2 {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+.cart-page-total>ul {
+    border: 1px solid #ddd;
+}
+
+.cart-page-total>ul>li {
+    list-style: none;
+    font-size: 15px;
+    color: #252525;
+    padding: 10px 30px;
+    border-bottom: 1px solid #ebebeb;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cart-page-total ul>li>span {
+    float: right;
+}
+
+.cart-page-total>a {
+    background-color: #333;
+    border: 1px solid #333;
+    border-radius: 2px;
+    font-size: 14px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 20px;
+    text-transform: capitalize;
+    transition: all 0.3s ease 0s;
+}
+
+
+a:focus,
+a:hover {
+    color: #abd373;
+    text-decoration: none;
+}
+
+.product-update input.button:hover {
+    background: #abd373;
+}
+
+.cart-page-total>a:hover {
+    background: #abd373;
+    border-color: #abd373;
+    color: var(--text-color--light);
+}

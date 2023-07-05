@@ -34,23 +34,32 @@ public class ProductController extends HttpServlet {
             ProductDAO dao = new ProductDAO();
             CategoryDAO cateDao = new CategoryDAO();
             String search = request.getParameter("search");
+            String category = request.getParameter("category");
+            if(search == "") {
+                search = null;
+            }
+            if(category == "") {
+                category = null;
+            }
             String offset = request.getParameter("offset");
             int pageOffset = 1;
             if(offset != null) {
                 pageOffset = Integer.parseInt(offset);
             } 
-            int pageSize = dao.getTotalProduct()/10;
-            if(pageSize % 10 !=0) {
+            
+            List<ProductDTO> listProduct = dao.getListProduct(search, category, pageOffset, 12);
+            Map<Integer, String> listCategory = cateDao.getAllCategory();
+            int pageSize = listProduct.size()/10;
+            if(pageSize % 12 !=0) {
                 pageSize++;
             }
-            List<ProductDTO> listProduct = dao.getListProduct(search, null, pageOffset, 10);
-            Map<Integer, String> listCategory = cateDao.getAllCategory();
-            
+            HttpSession session = request.getSession();
             if(listProduct.isEmpty()) {
+                url = SUCCESS;
+                session.setAttribute("LIST_PRODUCT", listProduct);
                 request.setAttribute("ERROR", "Don't have any product");
             } else {
                     url = SUCCESS;
-                    HttpSession session = request.getSession();
                     session.setAttribute("LIST_PRODUCT", listProduct);
                     session.setAttribute("LIST_CATEGORY", listCategory);
                     request.setAttribute("PAGE_SIZE", pageSize);

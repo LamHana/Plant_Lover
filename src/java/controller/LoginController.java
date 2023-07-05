@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.AccountDAO;
 import model.AccountDTO;
+import model.Cart;
 import model.UserDTO;
 /**
  *
@@ -21,7 +22,7 @@ import model.UserDTO;
 public class LoginController extends HttpServlet {
     private static final String LOGIN_PAGE="login.jsp";
     private static final String SUCCESS="MainController?action=product";
-    
+    private static final String VIEW_CART="cart.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -32,14 +33,23 @@ public class LoginController extends HttpServlet {
             AccountDAO dao = new AccountDAO();
             AccountDTO userAccount = dao.checkLogin(email, password);
             UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
+            HttpSession session = request.getSession();
             if(userAccount == null ) {
                 request.setAttribute("ERROR", "Incorrect userID or password");
             } else {
-                HttpSession session = request.getSession();
+                Cart cart = (Cart) session.getAttribute("CART");
+                if(cart != null) {
+                    url = VIEW_CART;
+                    session.setAttribute("LOGIN_ACCOUNT", userAccount); 
+                    session.setAttribute("LOGIN_USER", user);
+                    request.getRequestDispatcher(url).forward(request, response);
+                    return;
+                } else {
                     url = SUCCESS;
                     session.setAttribute("LOGIN_ACCOUNT", userAccount);
                     session.setAttribute("LOGIN_USER", user);
                 }
+            }
         } catch (Exception e) {
             log("Error at LoginController: " + e.toString());
         } finally {

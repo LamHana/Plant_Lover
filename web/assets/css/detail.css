@@ -1,0 +1,368 @@
+.breadcrumb-one {
+    position: relative;
+}
+
+.breadcrumb-img img{
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.breadcrumb-content {
+    position: absolute;
+    bottom: 20px;
+    left: 70px;
+    z-index: 1;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.breadcrumb-content h3 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.breadcrumb-content h1 {
+    font-size: 70px;
+    margin-bottom: 40px;
+}
+
+.breadcrumb-content>ul>li {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 25px;
+    color: var(--text-color--dark);
+    position: relative;
+}
+
+.breadcrumb-content>ul>li>a {
+    color: #fff;
+}
+
+.breadcrumb-content>ul>li>a:hover,
+.breadcrumb-content>ul>li.active {
+    color: #abd373;
+}
+
+.breadcrumb-content>ul>li:before {
+    content: "";
+    height: 13px;
+    width: 1px;
+    vertical-align: middle;
+    background-color: #fff;
+    display: inline-block;
+    margin: 0 15px;
+}
+
+.single-product-img {
+    margin-bottom: 10px;
+}
+
+.single-product-img img{
+    width: 471px;
+    height: 471px;
+    object-fit: cover;
+}
+
+a.popup-img {
+    position: absolute;
+    width: 43px;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    background: #373737;
+    color: #fff;
+    border-radius: 4px;
+    z-index: 999;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+
+.tab-content .tab-pane.active {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+}
+
+.tab-content .tab-pane {
+    display: block;
+    height: 0;
+    max-width: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.product-large-thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+a.popup-img {
+    position: absolute;
+    width: 43px;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    background: #373737;
+    color: #fff;
+    border-radius: 4px;
+    z-index: 999;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+
+.product-details-img {
+    padding: 0 25px;
+}
+
+.product-details-img img {
+    width: 100%;
+}
+
+
+.product-details-content {
+    position: relative;
+}
+
+.product-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.product-nav>a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #d1d1d1;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 3px;
+    color: #d1d1d1;
+    position: relative;
+    margin-right: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-details-content>h2 {
+    color: #555;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.review-link {
+    font-size: 14px;
+    color: #999;
+    margin-left: 10px;
+    line-height: 30px;
+    display: inline-block;
+}
+
+.single-product-price {
+    color: #555;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+    padding-right: 5px;
+}
+
+.product-description>p {
+    font-size: 14px;
+    line-height: 25px;
+    color: #666;
+    margin: 35px 0;
+}
+
+.stock {
+    color: #666666;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.single-product-quantity {
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.single-product-quantity .product-quantity {
+    background: #fff;
+    border: 1px solid #ededed;
+    float: left;
+    margin-right: 15px;
+    padding: 0 10px;
+    border-radius: 0;
+}
+
+.single-product-quantity .product-quantity input {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 20px;
+    font-weight: 400;
+    height: 38px;
+    line-height: 38px;
+    padding: 0;
+    width: 60px;
+}
+
+.wishlist-compare-btn {
+    margin-bottom: 30px;
+}
+
+.wishlist-compare-btn a.wishlist-btn {
+    margin-right: 20px;
+}
+
+.wishlist-compare-btn a {
+    background: none;
+    border: 1px solid #ededed;
+    color: #555;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    height: 45px;
+    line-height: 43px;
+    text-align: center;
+    width: 170px;
+    border-radius: 0;
+    transition: .3s ease;
+}
+
+.product-meta {
+    padding: 10px 0;
+    width: 100%;
+}
+
+.product-meta .posted-in {
+    color: #555;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.product-meta .posted-in>a {
+    color: #666;
+    font-weight: 400;
+    text-transform: none;
+}
+
+.single-product-sharing {
+    margin-bottom: 0;
+    padding: 0px;
+    width: 100%;
+}
+
+.single-product-sharing>h3 {
+    color: #555;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 15px;
+    text-transform: uppercase;
+}
+
+.single-product-sharing ul {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.single-product-sharing ul>li {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: 0;
+    margin-right: 15px;
+    position: relative;
+}
+
+.single-product-sharing ul>li>a {
+    color: #666;
+    display: block;
+    font-size: 16px;
+    text-align: center;
+}
+
+.product-btn {
+    background: #abd373;
+    border: none;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    letter-spacing: 2px;
+    line-height: 40px;
+    margin: 0;
+    padding: 0 40px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-btn:hover {
+    background: #94c74c;
+    color: #fff;
+}
+
+.wishlist-compare-btn a:hover:before {
+    animation: crFlipX 2s ease-in-out infinite both;
+}
+
+.wishlist-compare-btn a:hover {
+    background: #abd373;
+    border-color: #abd373;
+    color: #fff;
+    text-decoration: none;
+}
+
+.single-product-reviews {
+    color: #dcba00;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.wishlist-compare-btn a.wishlist-btn:before,
+.wishlist-compare-btn a.add-compare:before {
+    content: '\f08a';
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: 16px;
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+.wishlist-compare-btn a.add-compare:before {
+    content: '\f021';
+}
+
+.product-meta .posted-in>a:hover {
+    color: #abd373;
+    text-decoration: none;
+}
+
+.single-product-sharing ul>li>a:hover {
+    color: #abd373;
+}
+
