@@ -97,8 +97,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 <span class="float-right">${pageScope.total}$</span>
               </p>
               <p class="cart-btn">
-                <a href="MainController?action=checkout">View cart</a>
-                <a href="checkout.html">Checkout</a>
+                <a href="MainController?action=Checkout">View cart</a>
+                <a href="MainController?action=Order">Checkout</a>
               </p>
             </div>
           </c:if>

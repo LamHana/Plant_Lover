@@ -43,7 +43,7 @@ public class AccountDAO {
                     String phoneNumber = rs.getString("phoneNumber");
                     String roleID = rs.getString("roleID");
                     String address = rs.getString("address");
-                    user = new UserDTO(userID, userName, userName, roleID, address, accountID);
+                    user = new UserDTO(userID, userName, phoneNumber, roleID, address, accountID);
                 }
             }
         } catch (Exception e) {

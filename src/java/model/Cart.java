@@ -51,7 +51,7 @@ public class Cart {
         return check;
     }
 
-    public boolean remove(String id) {
+    public boolean remove(int id) {
         boolean check = false;
         try {
             if (this.cart != null) {

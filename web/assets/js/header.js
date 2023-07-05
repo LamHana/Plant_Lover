@@ -27,3 +27,11 @@ const dropdownCart = () => {
 
 miniCart.addEventListener("mouseover", dropdownCartShow);
 cartDropdown.addEventListener("mouseout", dropdownCart);
+
+jQuery(function ($) {
+  $("#mirror").text($("#alice").val());
+
+  $("#alice").on("input", function () {
+    $("#mirror").text($("#alice").val());
+  });
+});
