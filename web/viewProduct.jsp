@@ -85,7 +85,7 @@
                           <tr>
                             <td class="plantmore-product-remove">
                               <a
-                                href="MainController?action=RemoveCart&productID=${product.productID}"
+                                href="MainController?action=RemoveProduct&productID=${product.productID}"
                                 ><i class="fa fa-times"></i
                               ></a>
                             </td>
@@ -168,18 +168,48 @@
       </div>
     </div>
     <!-- Shopping cart end -->
+
+    <!-- Add product start -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="mt-50">
+            <div class="management-user">
+              <input
+                class="button"
+                name="action"
+                value="Management User"
+                type="submit"
+              />
+            </div>
+            <div class="add-product">
+              <input
+                class="button"
+                name="update_cart"
+                value="Add Product"
+                type="submit"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add product end -->
+
     <!--Pagination Start-->
-    <div class="product-pagination">
-      <ul>
-        <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
-          <li class="product-pagination__page">
-            <a href="ProductController?offset=${i}">${i}</a>
+    <div class="container">
+      <div class="product-pagination">
+        <ul>
+          <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
+            <li class="product-pagination__page">
+              <a href="ProductController?offset=${i}">${i}</a>
+            </li>
+          </c:forEach>
+          <li>
+            <a href="#"><i class="fa fa-angle-double-right"></i></a>
           </li>
-        </c:forEach>
-        <li>
-          <a href="#"><i class="fa fa-angle-double-right"></i></a>
-        </li>
-      </ul>
+        </ul>
+      </div>
     </div>
     <!--Pagination End-->
   </body>

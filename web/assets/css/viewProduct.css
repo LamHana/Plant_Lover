@@ -8,3 +8,11 @@
     height: 40px;
     width: 80px;
 }
+
+.management-user {
+    float: left;
+}
+
+.add-product {
+    float: right;
+}
