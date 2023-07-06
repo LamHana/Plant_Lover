@@ -20,7 +20,7 @@ import model.ProductDAO;
  */
 public class RemoveProductController extends HttpServlet {
 
-    private static final String ERROR = "home.jsp";
+    private static final String ERROR = "viewProduct.jsp";
     private static final String SUCCESS = "ProductController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import model.CategoryDAO;
 import model.ProductDAO;
 import model.ProductDTO;
+import model.UserDTO;
 
 /**
  *
@@ -25,6 +26,9 @@ public class ProductController extends HttpServlet {
 
     private static final String LOGIN_PAGE="login.jsp";
     private static final String SUCCESS="home.jsp";
+     private static final String USER = "US";
+    private static final String ADMIN = "AD";
+    private static final String ADMIN_PAGE = "viewProduct.jsp";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -54,11 +58,14 @@ public class ProductController extends HttpServlet {
                 pageSize++;
             }
             HttpSession session = request.getSession();
-            if(listProduct.isEmpty()) {
-                url = SUCCESS;
-                session.setAttribute("LIST_PRODUCT", listProduct);
-                request.setAttribute("ERROR", "Don't have any product");
-            } else {
+            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
+            String roleID = user.getRoleID();
+            if(ADMIN.equals(roleID)) {
+                   url = ADMIN_PAGE;
+                    session.setAttribute("LIST_PRODUCT", listProduct);
+                    session.setAttribute("LIST_CATEGORY", listCategory);
+                    request.setAttribute("PAGE_SIZE", pageSize);
+                } else if(USER.equals(roleID)) {
                     url = SUCCESS;
                     session.setAttribute("LIST_PRODUCT", listProduct);
                     session.setAttribute("LIST_CATEGORY", listCategory);

@@ -37,7 +37,7 @@ public class MainController extends HttpServlet {
     private static final String ADD_PAGE_VIEW = "add.jsp";
     private static final String ADD = "Add";
     private static final String ADD_CONTROLLER = "AddProductController";
-    private static final String UPDATE_PRODUCT = "UpdateProduct";
+    private static final String UPDATE_PRODUCT = "Update Product";
     private static final String UPDATE_PRODUCT_CONTROLLER = "UpdateProductController";
     private static final String DETAIL = "Detail";
     private static final String DETAIL_CONTROLLER = "DetailController";

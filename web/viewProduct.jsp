@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,7 +54,7 @@
     <!-- breadcrumb two end -->
 
     <!-- Shopping cart start -->
-    <div class="Shopping-cart-area mb-110">
+    <div class="Shopping-cart-area mb-35">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -63,25 +64,23 @@
                   <thead>
                     <tr>
                       <th class="plantmore-product-remove">remove</th>
+                      <th class="plantmore-product-no">No</th>
+                      <th class="plantmore-product-id">Product ID</th>
                       <th class="plantmore-product-thumbnail">images</th>
                       <th class="cart-product-name">Product</th>
+                      <th class="product-name">Category</th>
                       <th class="plantmore-product-price">Unit Price</th>
                       <th class="plantmore-product-quantity">Quantity</th>
                       <th class="plantmore-product-update">Update</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:if test="${sessionScope.CART.size() > 0}">
-                      <c:forEach
-                        var="product"
-                        varStatus="counter"
-                        items="${sessionScope.CART.getCart().values()}"
-                      >
-                        <c:set
-                          var="total"
-                          value="${total + (product.quantity * product.price)}"
-                          scope="page"
-                        />
+                    <c:forEach
+                      var="product"
+                      varStatus="counter"
+                      items="${sessionScope.LIST_PRODUCT}"
+                    >
+                      <c:if test="${product.isDeleted == false}">
                         <form action="MainController">
                           <tr>
                             <td class="plantmore-product-remove">
@@ -89,6 +88,10 @@
                                 href="MainController?action=RemoveCart&productID=${product.productID}"
                                 ><i class="fa fa-times"></i
                               ></a>
+                            </td>
+                            <td>${counter.count}</td>
+                            <td>
+                              <span>${product.productID}</span>
                             </td>
                             <td class="plantmore-product-thumbnail">
                               <a
@@ -102,8 +105,17 @@
                                 >${product.productName}</a
                               >
                             </td>
-                            <td class="plantmore-product-price">
-                              <span class="amount">$${product.price}</span>
+                            <td>
+                              ${sessionScope.LIST_CATEGORY.get(product.categoryID)}
+                            </td>
+                            <td class="product-price">
+                              <input
+                                class="amount"
+                                type="text"
+                                name="price"
+                                value="${product.price}"
+                                required=""
+                              />
                             </td>
                             <td class="plantmore-product-quantity">
                               <input
@@ -121,18 +133,28 @@
                                   name="productID"
                                 />
                                 <input
+                                  value="${product.productName}"
+                                  type="hidden"
+                                  name="productName"
+                                />
+                                <input
+                                  value="${product.image}"
+                                  type="hidden"
+                                  name="image"
+                                />
+                                <input
                                   class="button"
                                   name="action"
-                                  value="Update"
+                                  value="Update Product"
                                   type="submit"
                                 />
                               </div>
                             </td>
                           </tr>
                         </form>
-                      </c:forEach>
-                    </c:if>
-                    <c:if test="${sessionScope.CART.size() == 0}">
+                      </c:if>
+                    </c:forEach>
+                    <c:if test="${sessionScope.LIST_PRODUCT.size() == 0}">
                       <tr class="empty-row">
                         <td>You don't have any product</td>
                       </tr>
@@ -146,5 +168,19 @@
       </div>
     </div>
     <!-- Shopping cart end -->
+    <!--Pagination Start-->
+    <div class="product-pagination">
+      <ul>
+        <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
+          <li class="product-pagination__page">
+            <a href="ProductController?offset=${i}">${i}</a>
+          </li>
+        </c:forEach>
+        <li>
+          <a href="#"><i class="fa fa-angle-double-right"></i></a>
+        </li>
+      </ul>
+    </div>
+    <!--Pagination End-->
   </body>
 </html>

@@ -35,7 +35,7 @@ public class LoginGoogleController extends HttpServlet {
     private static final String VIEW_CART = "cart.jsp";
     private static final String USER = "US";
     private static final String ADMIN = "AD";
-    private static final String ADMIN_PAGE = "viewProduct.jsp";
+    private static final String ADMIN_PAGE = "ProductController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

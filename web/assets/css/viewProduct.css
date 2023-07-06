@@ -1,0 +1,10 @@
+.product-price input {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 80px;
+}

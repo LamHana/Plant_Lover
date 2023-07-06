@@ -146,8 +146,8 @@ public class ProductDAO {
                 ptm.setString(1, newProduct.getProductName());
                 ptm.setDouble(2, newProduct.getPrice());
                 ptm.setInt(3, newProduct.getQuantity());
-                ptm.setInt(4, newProduct.getProductID());
-                ptm.setString(5, newProduct.getImage());
+                ptm.setString(4, newProduct.getImage());
+                ptm.setInt(5, newProduct.getProductID());
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
