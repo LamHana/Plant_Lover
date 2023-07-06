@@ -37,6 +37,8 @@ public class MainController extends HttpServlet {
     private static final String ADD_PAGE_VIEW = "add.jsp";
     private static final String ADD = "Add";
     private static final String ADD_CONTROLLER = "AddProductController";
+    private static final String ADD_PRODUCT_VIEW = "Add Product";
+    private static final String ADD_PRODUCT_VIEW_PAGE = "add.jsp";
     private static final String UPDATE_PRODUCT = "Update Product";
     private static final String UPDATE_PRODUCT_CONTROLLER = "UpdateProductController";
     private static final String DETAIL = "Detail";
@@ -98,6 +100,8 @@ public class MainController extends HttpServlet {
                 url = UPDATE_CART_CONTROLLER;
             } else if (REMOVE_CART.equals(action)) {
                 url = REMOVE_CART_CONTROLLER;
+            } else if (ADD_PRODUCT_VIEW.equals(action)) {
+                url = ADD_PRODUCT_VIEW_PAGE;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

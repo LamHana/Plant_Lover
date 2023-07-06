@@ -16,3 +16,73 @@
 .add-product {
     float: right;
 }
+
+.add-product-button {
+    background-color: #333;
+    border: 0 none;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    letter-spacing: 1px;
+    line-height: 42px;
+    padding: 0 60px;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out 0s;
+    width: inherit;
+}
+
+.add-product-button:hover {
+    background: #abd373;
+}
+
+.add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-select {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+    height: 42px;
+    width: 100%;
+    padding: 0 0 0 10px;
+}
+
+.form-select option {
+    background: #fff;
+    border: 0px solid #626262;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.form-select .option:hover,
+.form-select .option.focus,
+.form-select .option.selected.focus {
+    color: #fff;
+    background: #abd373;
+}
+
+.add-price {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 55px;
+}
+
+.message-success {
+    color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}

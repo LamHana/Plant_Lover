@@ -50,7 +50,7 @@ public class AddProductController extends HttpServlet {
             Boolean check = dao.addProduct(newProduct);
                 if (check) {
                     url = SUCCESS;
-                    request.setAttribute("MESSAGE", quantity + " - " + productName + " added");
+                    request.setAttribute("MESSAGE_ADD", quantity + " - " + productName + " added");
                     session.setAttribute("LIST_PRODUCT", dao.getListProduct(null, null, 1, 12));
                 }
 

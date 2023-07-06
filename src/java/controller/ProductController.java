@@ -69,7 +69,7 @@ public class ProductController extends HttpServlet {
                     url = SUCCESS;
                     session.setAttribute("LIST_PRODUCT", listProduct);
                     session.setAttribute("LIST_CATEGORY", listCategory);
-                    request.setAttribute("PAGE_SIZE", pageSize);
+                    session.setAttribute("PAGE_SIZE", pageSize);
                 }
         } catch (Exception e) {
             log("Error at ProductController: " + e.toString());

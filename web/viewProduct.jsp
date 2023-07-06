@@ -34,7 +34,7 @@
   </head>
   <body>
     <!-- breadcrumb two start -->
-    <div class="breadcrumb-tow mb-120">
+    <div class="breadcrumb-tow mb-100">
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -53,6 +53,15 @@
     </div>
     <!-- breadcrumb two end -->
 
+    <c:if test="${requestScope.MESSAGE_ADD != null}">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="message-success">Add Successful</h3>
+          </div>
+        </div>
+      </div>
+    </c:if>
     <!-- Shopping cart start -->
     <div class="Shopping-cart-area mb-35">
       <div class="container">
@@ -175,20 +184,24 @@
         <div class="col-12">
           <div class="mt-50">
             <div class="management-user">
-              <input
-                class="button"
-                name="action"
-                value="Management User"
-                type="submit"
-              />
+              <form action="MainController">
+                <input
+                  class="button"
+                  name="action"
+                  value="Management User"
+                  type="submit"
+                />
+              </form>
             </div>
             <div class="add-product">
-              <input
-                class="button"
-                name="update_cart"
-                value="Add Product"
-                type="submit"
-              />
+              <form action="MainController">
+                <input
+                  class="button"
+                  name="action"
+                  value="Add Product"
+                  type="submit"
+                />
+              </form>
             </div>
           </div>
         </div>
