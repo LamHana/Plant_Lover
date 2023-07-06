@@ -23,7 +23,7 @@ import model.UserDTO;
 public class OrderController extends HttpServlet {
 
     private static final String ERROR = "checkout.jsp";
-    private static final String SUCCESS = "success.html";
+    private static final String SUCCESS = "success.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
