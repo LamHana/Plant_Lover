@@ -33,6 +33,9 @@ public class LoginGoogleController extends HttpServlet {
     private static final String SUCCESS = "MainController?action=product";
     private static final String REGISTER_PAGE = "register.jsp";
     private static final String VIEW_CART = "cart.jsp";
+    private static final String USER = "US";
+    private static final String ADMIN = "AD";
+    private static final String ADMIN_PAGE = "viewProduct.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,16 +53,23 @@ public class LoginGoogleController extends HttpServlet {
                 if (userAccount != null) {
                     Cart cart = (Cart) session.getAttribute("CART");
                     UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
+                    String roleID = user.getRoleID();
                     if (cart != null) {
                         url = VIEW_CART;
                         session.setAttribute("LOGIN_ACCOUNT", userAccount);
                         session.setAttribute("LOGIN_USER", user);
                         request.getRequestDispatcher(url).forward(request, response);
                         return;
-                    } else {
+                    } else if (ADMIN.equals(roleID)) {
+                        url = ADMIN_PAGE;
+                        session.setAttribute("LOGIN_ACCOUNT", userAccount);
+                        session.setAttribute("LOGIN_USER", user);
+                    } else if (USER.equals(roleID)) {
                         url = SUCCESS;
                         session.setAttribute("LOGIN_ACCOUNT", userAccount);
                         session.setAttribute("LOGIN_USER", user);
+                    } else {
+                        request.setAttribute("ERROR", "Your role is not support!");
                     }
                 } else {
                     url = REGISTER_PAGE;

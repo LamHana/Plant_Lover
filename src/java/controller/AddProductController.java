@@ -23,8 +23,8 @@ import model.ProductDTO;
  */
 public class AddProductController extends HttpServlet {
 
-    private static final String ERROR = "add.jsp";
-    private static final String SUCCESS = "home.jsp";
+    private static final String ERROR = "viewProduct.jsp";
+    private static final String SUCCESS = "viewProduct.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

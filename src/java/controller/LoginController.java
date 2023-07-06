@@ -23,6 +23,10 @@ public class LoginController extends HttpServlet {
     private static final String LOGIN_PAGE="login.jsp";
     private static final String SUCCESS="MainController?action=product";
     private static final String VIEW_CART="cart.jsp";
+    private static final String USER="US";
+    private static final String ADMIN="AD";
+    private static final String ADMIN_PAGE="viewProduct.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,6 +41,7 @@ public class LoginController extends HttpServlet {
             if(userAccount == null ) {
                 request.setAttribute("ERROR", "Incorrect userID or password");
             } else {
+                String roleID = user.getRoleID();
                 Cart cart = (Cart) session.getAttribute("CART");
                 if(cart != null) {
                     url = VIEW_CART;
@@ -44,10 +49,16 @@ public class LoginController extends HttpServlet {
                     session.setAttribute("LOGIN_USER", user);
                     request.getRequestDispatcher(url).forward(request, response);
                     return;
-                } else {
-                    url = SUCCESS;
+                } else if(ADMIN.equals(roleID)) {
+                    url = ADMIN_PAGE;
                     session.setAttribute("LOGIN_ACCOUNT", userAccount);
                     session.setAttribute("LOGIN_USER", user);
+                } else if(USER.equals(roleID)) {
+                    url=SUCCESS;
+                    session.setAttribute("LOGIN_ACCOUNT", userAccount);
+                    session.setAttribute("LOGIN_USER", user);
+                } else {
+                    request.setAttribute("ERROR", "Your role is not support!");
                 }
             }
         } catch (Exception e) {
