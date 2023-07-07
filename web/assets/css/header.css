@@ -75,6 +75,7 @@
 
 .header__nav-cart {
     list-style-type: none;
+    display: flex;
 }
 
 .mini-cart>a {
@@ -295,4 +296,25 @@
     background: rgba(255, 255, 255, .85);
     box-shadow: 0 8px 6px -6px rgba(0, 0, 0, .4);
     animation: 500ms ease-in-out 0s;
+}
+
+.login-button {
+    background-color: #333;
+    border: 0 none;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    height: 40px;
+    letter-spacing: 1px;
+    line-height: 32px;
+    padding: 0 20px;
+    transition: all 0.3s ease-in-out 0s;
+    width: inherit;
+}
+
+.login-button:hover {
+    background-color: var(--primary-color);
 }

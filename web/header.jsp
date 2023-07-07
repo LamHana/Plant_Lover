@@ -105,6 +105,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <!--Cart Dropdown End-->
         </div>
       </li>
+      <li class="header__logout">
+        <form action="MainController">
+          <input
+            type="submit"
+            name="action"
+            value="Logout"
+            class="login-button"
+          />
+        </form>
+      </li>
     </ul>
   </div>
 </div>
