@@ -22,7 +22,7 @@ public class MainController extends HttpServlet {
     private static final String LOGIN_CONTROLLER = "LoginController";
     private static final String LOGIN_GOOGLE = "LoginGoogle";
     private static final String LOGIN_GOOGLE_CONTROLLER = "LoginGoogleController";
-    private static final String REGISTER = "register";
+    private static final String REGISTER = "Register";
     private static final String REGISTER_CONTROLLER = "RegisterController";
     private static final String REGISTER_PAGE = "RegisterPage";
     private static final String REGISTER_VIEW_PAGE = "register.jsp";

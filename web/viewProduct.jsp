@@ -46,7 +46,7 @@
             </div>
             <div class="breadcrumb-content breadcrumb-content-tow">
               <ul>
-                <li><a href="home.jsp">Home</a></li>
+                <li><a href="ProductController">Home</a></li>
                 <li class="active">Management Product</li>
               </ul>
             </div>
@@ -71,7 +71,7 @@
         <div class="col-md-4 search-dropdown">
           <form action="MainController">
             <input
-              name="search"
+              name="searchProduct"
               id="search"
               placeholder="Search"
               value="${param.search}"

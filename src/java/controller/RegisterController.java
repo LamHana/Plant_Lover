@@ -28,7 +28,7 @@ import javax.activation.*;
 public class RegisterController extends HttpServlet {
 
     private static final String ERROR = "register.jsp";
-    private static final String SUCCESS = "user.jsp";
+    private static final String SUCCESS = "ProductController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -81,7 +81,7 @@ public class RegisterController extends HttpServlet {
             // Assuming you are sending email from localhost
             String host = "smtp.elasticemail.com";
             String username = "lamtngochan@gmail.com";
-            String passwordHost = "A08239CFDEA13DAE3B23AC0F6BC77D3D9D3F";
+            String passwordHost = "0CB4D40997EA5D80A319D8E8AFDBA11EEC70";
             int smtpPort = 2525;
             // Get system properties
             Properties properties = System.getProperties();

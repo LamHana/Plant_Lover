@@ -28,7 +28,7 @@ private static final String ERROR = "manage.jsp";
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            String search = request.getParameter("search");
+            String search = request.getParameter("searchUser");
             if(search == "") {
                 search = null;
             }

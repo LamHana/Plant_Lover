@@ -37,7 +37,7 @@ public class ProductController extends HttpServlet {
         try {
             ProductDAO dao = new ProductDAO();
             CategoryDAO cateDao = new CategoryDAO();
-            String search = request.getParameter("search");
+            String search = request.getParameter("searchProduct");
             String category = request.getParameter("category");
             if(search == "") {
                 search = null;

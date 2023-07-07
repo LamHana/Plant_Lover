@@ -72,7 +72,7 @@
         <div class="col-md-4 search-dropdown">
           <form action="MainController">
             <input
-              name="search"
+              name="searchUser"
               id="search"
               placeholder="Search"
               value="${param.search}"

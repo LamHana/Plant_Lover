@@ -36,11 +36,11 @@ public class LoginController extends HttpServlet {
             String password = request.getParameter("password");
             AccountDAO dao = new AccountDAO();
             AccountDTO userAccount = dao.checkLogin(email, password);
-            UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
             HttpSession session = request.getSession();
             if(userAccount == null ) {
                 request.setAttribute("ERROR", "Incorrect userID or password");
             } else {
+                UserDTO user = dao.getUserByAccountID(userAccount.getAccountID());
                 String roleID = user.getRoleID();
                 Cart cart = (Cart) session.getAttribute("CART");
                 if(cart != null) {

@@ -33,49 +33,6 @@ button {
     font-family: inherit;
 }
 
-.button-text {
-    font-weight: 400;
-    font-size: 1.2rem;
-    line-height: 1.67;
-    color: var(--text-color--light);
-}
-
-.btn-effect {
-    --border-radius: 5px;
-    --color: #ffffff;
-    --bg-color: var(--secondary-color);
-    position: sticky;
-    background-color: transparent;
-}
-
-.btn-effect:hover {
-    color: var(--color);
-}
-
-.btn-effect::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: -1;
-    content: "";
-    display: inline-block;
-    width: 0;
-    height: 100%;
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    opacity: 0;
-    visibility: hidden;
-    transition: all ease 0.3s;
-}
-
-.btn-effect:hover::before {
-    left: 0;
-    width: 100%;
-    opacity: 1;
-    visibility: visible;
-    cursor: pointer;
-}
-
 .btn {
     --width: 200px;
     --height: 55px;
@@ -114,6 +71,10 @@ button {
 
 .mt-85 {
     margin-top: 85px;
+}
+
+.mt-100 {
+    margin-top: 100px;
 }
 
 .mb-35 {

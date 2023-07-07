@@ -18,11 +18,11 @@ import utils.DBUtils;
  */
 public class AccountDAO {
 
-    private static final String LOGIN = "SELECT accountID FROM Account " + "WHERE email=? AND password=?";
-    private static final String ISEXITEMAIL = "SELECT accountID FROM Account " + "WHERE email=?";
+    private static final String LOGIN = "SELECT * FROM Account " + "WHERE email=? AND password=?";
+    private static final String ISEXITEMAIL = "SELECT * FROM Account " + "WHERE email=?";
     private static final String USER = "SELECT * FROM UserTb " + "WHERE accountID=?";
     private static final String INSERT_ACCOUNT = "INSERT INTO Account(email,password) VALUES(?,?)";
-    private static final String INSERT_USER = "INSERT INTO UserTb (UserName, PhoneNumber, RoleID, Address, AccountID) VALUES(?,?,?,?,(SELECT MAX(AccountID) FROM Account))";
+    private static final String INSERT_USER = "INSERT INTO UserTb (UserName, PhoneNumber, RoleID, Address, AccountID, isDeleted) VALUES(?,?,?,?,(SELECT MAX(AccountID) FROM Account),?)";
     private static final String GET_NEW_ACCOUNTID = "SELECT TOP (1) [AccountID] FROM Account ORDER BY accountID desc";
     private static final String CHECK_DUPLICATE = "SELECT email FROM Account WHERE email=?";
 
@@ -80,7 +80,10 @@ public class AccountDAO {
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     int accountID = Integer.valueOf(rs.getString("accountID"));
-                    userAccount = new AccountDTO(accountID, email, password);
+                    boolean isDeleted = rs.getBoolean("isDeleted");
+                    if (!isDeleted) {
+                        userAccount = new AccountDTO(accountID, email);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -114,7 +117,10 @@ public class AccountDAO {
                 rs = ptm.executeQuery();
                 if (rs.next()) {
                     int accountID = Integer.valueOf(rs.getString("accountID"));
-                    userAccount = new AccountDTO(accountID, email);
+                    boolean isDeleted = rs.getBoolean("isDeleted");
+                    if (!isDeleted) {
+                        userAccount = new AccountDTO(accountID, email);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -135,7 +141,7 @@ public class AccountDAO {
     }
 
     public boolean checkDuplicate(String email) throws SQLException {
-       boolean check = false;
+        boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -147,7 +153,10 @@ public class AccountDAO {
                 ptm.setString(1, email);
                 rs = ptm.executeQuery();
                 if (rs.next()) {
-                    check = true;
+                    boolean isDeleted = rs.getBoolean("isDeleted");
+                    if (!isDeleted) {
+                        check = true;
+                    }
                 }
             }
         } catch (Exception e) {
@@ -193,9 +202,9 @@ public class AccountDAO {
             if (conn != null) {
                 conn.close();
             }
-    }
-            return check;
-    
+        }
+        return check;
+
     }
 
     public boolean insertUser(UserDTO user) throws SQLException {
@@ -212,6 +221,7 @@ public class AccountDAO {
                 ptm.setString(2, user.getPhoneNumber());
                 ptm.setString(3, user.getRoleID());
                 ptm.setString(4, user.getAddress());
+                ptm.setBoolean(5, false);
                 check = ptm.executeUpdate() > 0 ? true : false;
             }
         } catch (Exception e) {
@@ -226,8 +236,8 @@ public class AccountDAO {
             if (conn != null) {
                 conn.close();
             }
-    }
-            return check;
+        }
+        return check;
     }
 
     public int getNewAccountID() throws SQLException {
@@ -261,7 +271,5 @@ public class AccountDAO {
 
         return accountID;
     }
-
-   
 
 }
