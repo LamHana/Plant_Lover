@@ -55,6 +55,10 @@ public class MainController extends HttpServlet {
     private static final String UPDATE_CART_CONTROLLER = "UpdateCartController";
     private static final String REMOVE_CART = "RemoveCart";
     private static final String REMOVE_CART_CONTROLLER = "RemoveCartController";
+    private static final String MANAGE_PRODUCT = "Management Product";
+    private static final String MANAGE_PRODUCT_CONTROLLER = "ProductController";
+    private static final String MANAGE_USER = "Management User";
+    private static final String MANAGE_USER_CONTROLLER = "UserController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -102,6 +106,10 @@ public class MainController extends HttpServlet {
                 url = REMOVE_CART_CONTROLLER;
             } else if (ADD_PRODUCT_VIEW.equals(action)) {
                 url = ADD_PRODUCT_VIEW_PAGE;
+            } else if (MANAGE_PRODUCT.equals(action)) {
+                url = MANAGE_PRODUCT_CONTROLLER;
+            } else if (MANAGE_USER.equals(action)) {
+                url = MANAGE_USER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

@@ -35,6 +35,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <title>Plant Lover</title>
   </head>
   <body>
+    <!-- Header -->
+    <c:import url="./header.jsp" />
+    <!-- End Header -->
     <!-- Breadcrumb two start -->
     <div class="breadcrumb-tow mb-120">
       <div class="container">
@@ -67,7 +70,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <h2>Add New Product</h2>
         </div>
         <div class="form-product">
-          <form action="MainController">
+          <form action="MainController" method="POST">
             <div class="checkbox-form">
               <div class="row">
                 <div class="col-md-6">

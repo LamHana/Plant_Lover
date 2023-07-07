@@ -7,72 +7,50 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.CategoryDAO;
-import model.ProductDAO;
-import model.ProductDTO;
+import model.UserDAO;
 import model.UserDTO;
 
 /**
  *
  * @author Hana
  */
-public class ProductController extends HttpServlet {
+public class UserController extends HttpServlet {
+private static final String ERROR = "manage.jsp";
+    private static final String SUCCESS = "manage.jsp";
 
-    private static final String LOGIN_PAGE="login.jsp";
-    private static final String SUCCESS="home.jsp";
-     private static final String USER = "US";
-    private static final String ADMIN = "AD";
-    private static final String ADMIN_PAGE = "viewProduct.jsp";
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = LOGIN_PAGE;
+        String url = ERROR;
         try {
-            ProductDAO dao = new ProductDAO();
-            CategoryDAO cateDao = new CategoryDAO();
             String search = request.getParameter("search");
-            String category = request.getParameter("category");
             if(search == "") {
                 search = null;
-            }
-            if(category == "") {
-                category = null;
             }
             String offset = request.getParameter("offset");
             int pageOffset = 1;
             if(offset != null) {
                 pageOffset = Integer.parseInt(offset);
             } 
-            
-            List<ProductDTO> listProduct = dao.getListProduct(search, category, pageOffset, 12);
-            Map<Integer, String> listCategory = cateDao.getAllCategory();
-            int pageSize = listProduct.size()/12;
+            UserDAO dao = new UserDAO();
+            List<UserDTO> listUser = dao.getListUser(search,pageOffset, 12);
+            HttpSession session = request.getSession();
+            int pageSize = listUser.size()/12;
             if(pageSize % 12 !=0) {
                 pageSize++;
             }
-            HttpSession session = request.getSession();
-            UserDTO user = (UserDTO) session.getAttribute("LOGIN_USER");
-            String roleID = user.getRoleID();
-            if(ADMIN.equals(roleID)) {
-                   url = ADMIN_PAGE;
-                    session.setAttribute("LIST_PRODUCT", listProduct);
-                    session.setAttribute("LIST_CATEGORY", listCategory);
-                    request.setAttribute("PAGE_SIZE", pageSize);
-                } else if(USER.equals(roleID)) {
-                    url = SUCCESS;
-                    session.setAttribute("LIST_PRODUCT", listProduct);
-                    session.setAttribute("LIST_CATEGORY", listCategory);
-                    session.setAttribute("PAGE_SIZE", pageSize);
-                }
+            if (listUser.size() > 0) {
+                session.setAttribute("LIST_USER", listUser);
+                url = SUCCESS;
+            }
+            
         } catch (Exception e) {
-            log("Error at ProductController: " + e.toString());
+            log("Error at UserController: " + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }

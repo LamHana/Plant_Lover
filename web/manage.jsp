@@ -42,12 +42,12 @@
         <div class="row">
           <div class="col-12">
             <div class="breadcrumb-title">
-              <h1>Management Product</h1>
+              <h1>Management User</h1>
             </div>
             <div class="breadcrumb-content breadcrumb-content-tow">
               <ul>
                 <li><a href="home.jsp">Home</a></li>
-                <li class="active">Management Product</li>
+                <li class="active">Management User</li>
               </ul>
             </div>
           </div>
@@ -75,89 +75,83 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th class="plantmore-product-remove">remove</th>
-                      <th class="plantmore-product-no">No</th>
-                      <th class="plantmore-product-id">Product ID</th>
-                      <th class="plantmore-product-thumbnail">images</th>
-                      <th class="cart-product-name">Product</th>
-                      <th class="product-name">Category</th>
-                      <th class="plantmore-product-price">Unit Price</th>
-                      <th class="plantmore-product-quantity">Quantity</th>
-                      <th class="plantmore-product-update">Update</th>
+                      <th class="user-remove">remove</th>
+                      <th class="user-no">No</th>
+                      <th class="user-id">User ID</th>
+                      <th class="user-name">User Name</th>
+                      <th class="user-role">US</th>
+                      <th class="user-phone">Phone</th>
+                      <th class="user-address">Address</th>
+                      <th class="user-update">Update</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:forEach
-                      var="product"
+                      var="user"
                       varStatus="counter"
-                      items="${sessionScope.LIST_PRODUCT}"
+                      items="${sessionScope.LIST_USER}"
                     >
-                      <c:if test="${product.isDeleted == false}">
+                      <c:if test="${user.isDeleted == false}">
                         <form action="MainController">
                           <tr>
-                            <td class="plantmore-product-remove">
+                            <td class="user-remove">
                               <a
-                                href="MainController?action=RemoveProduct&productID=${product.productID}"
+                                href="MainController?action=RemoveUser&userID=${user.userID}"
                                 ><i class="fa fa-times"></i
                               ></a>
                             </td>
                             <td>${counter.count}</td>
                             <td>
-                              <span>${product.productID}</span>
+                              <span>${user.userID}</span>
                             </td>
-                            <td class="plantmore-product-thumbnail">
-                              <a
-                                href="MainController?action=Detail&productID=${product.productID}"
-                                ><img src="${product.image}" alt=""
-                              /></a>
-                            </td>
-                            <td class="plantmore-product-name">
-                              <a
-                                href="MainController?action=Detail&productID=${product.productID}"
-                                >${product.productName}</a
-                              >
-                            </td>
-                            <td>
-                              ${sessionScope.LIST_CATEGORY.get(product.categoryID)}
-                            </td>
-                            <td class="product-price">
+                            <td class="user-name">
                               <input
                                 class="amount"
                                 type="text"
-                                name="price"
-                                value="${product.price}"
+                                name="userName"
+                                value="${user.userName}"
                                 required=""
                               />
                             </td>
-                            <td class="plantmore-product-quantity">
+                            <td class="user-roleID">
                               <input
-                                value="${product.quantity}"
-                                type="number"
-                                name="quantity"
-                                min="1"
+                                class="amount"
+                                type="text"
+                                name="roleID"
+                                value="${user.roleID}"
+                                required=""
+                              />
+                            </td>
+                            <td class="user-phone">
+                              <input
+                                class="amount"
+                                type="text"
+                                name="phoneNumber"
+                                value="${user.phoneNumber}"
+                                required=""
+                              />
+                            </td>
+
+                            <td class="user-address">
+                              <input
+                                class="amount"
+                                type="text"
+                                name="address"
+                                value="${user.address}"
+                                required=""
                               />
                             </td>
                             <td>
-                              <div class="product-update">
+                              <div class="user-update">
                                 <input
-                                  value="${product.productID}"
+                                  value="${user.userID}"
                                   type="hidden"
-                                  name="productID"
-                                />
-                                <input
-                                  value="${product.productName}"
-                                  type="hidden"
-                                  name="productName"
-                                />
-                                <input
-                                  value="${product.image}"
-                                  type="hidden"
-                                  name="image"
+                                  name="userID"
                                 />
                                 <input
                                   class="button"
                                   name="action"
-                                  value="Update Product"
+                                  value="Update User"
                                   type="submit"
                                 />
                               </div>
@@ -166,9 +160,9 @@
                         </form>
                       </c:if>
                     </c:forEach>
-                    <c:if test="${sessionScope.LIST_PRODUCT.size() == 0}">
+                    <c:if test="${sessionScope.LIST_USER.size() == 0}">
                       <tr class="empty-row">
-                        <td>You don't have any product</td>
+                        <td>You don't have any user</td>
                       </tr>
                     </c:if>
                   </tbody>
@@ -191,17 +185,7 @@
                 <input
                   class="button"
                   name="action"
-                  value="Management User"
-                  type="submit"
-                />
-              </form>
-            </div>
-            <div class="add-product">
-              <form action="MainController">
-                <input
-                  class="button"
-                  name="action"
-                  value="Add Product"
+                  value="Management Product"
                   type="submit"
                 />
               </form>
@@ -218,7 +202,7 @@
         <ul>
           <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
             <li class="product-pagination__page">
-              <a href="ProductController?offset=${i}">${i}</a>
+              <a href="UserController?offset=${i}">${i}</a>
             </li>
           </c:forEach>
           <li>

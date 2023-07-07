@@ -43,7 +43,8 @@ public class AccountDAO {
                     String phoneNumber = rs.getString("phoneNumber");
                     String roleID = rs.getString("roleID");
                     String address = rs.getString("address");
-                    user = new UserDTO(userID, userName, phoneNumber, roleID, address, accountID);
+                    boolean isDeleted = rs.getBoolean("isDeleted");
+                    user = new UserDTO(userID, userName, phoneNumber, roleID, address, accountID, isDeleted);
                 }
             }
         } catch (Exception e) {

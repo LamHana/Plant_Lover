@@ -86,3 +86,47 @@
     align-items: center;
     margin-bottom: 30px;
 }
+
+.user-address input {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 300px;
+}
+
+.user-roleID input {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 40px;
+}
+
+.user-phone input {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 100px;
+}
+
+.user-name input {
+    border: none;
+    color: #222555;
+    font-size: 14px;
+    font-weight: normal;
+    border: 1px solid #ededed;
+    padding-left: 10px;
+    height: 40px;
+    width: 220px;
+}

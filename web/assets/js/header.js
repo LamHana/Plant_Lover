@@ -35,3 +35,16 @@ jQuery(function ($) {
     $("#mirror").text($("#alice").val());
   });
 });
+
+$(document).ready(function () {
+  $(".toast").toast({
+    animation: true,
+    autohide: true,
+    delay: 5000,
+  });
+});
+
+window.onbeforeunload = function () {
+  // Show the toast
+  $(".toast").toast("show");
+};

@@ -16,6 +16,15 @@ public class UserDTO {
     private String roleID;
     private String address;
     private int accountID;
+    private boolean isDeleted;
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
 
     @Override
     public String toString() {
@@ -29,6 +38,7 @@ public class UserDTO {
         this.roleID = "";
         this.address = "";
         this.accountID = 0;
+        this.isDeleted = false;
     }
     public UserDTO(String userName, String phoneNumber, String roleID, String address) {
         this.userName = userName;
@@ -36,23 +46,26 @@ public class UserDTO {
         this.roleID = roleID;
         this.address = address;
         this.accountID = 0;
+        this.isDeleted = false;
     }
     
-    public UserDTO(String userName, String phoneNumber, String roleID, String address, int accountID) {
+    public UserDTO(String userName, String phoneNumber, String roleID, String address, int accountID, boolean isDeleted) {
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.roleID = roleID;
         this.address = address;
         this.accountID = accountID;
+        this.isDeleted = isDeleted;
     }
     
-    public UserDTO(int userID, String userName, String phoneNumber, String roleID, String address, int accountID) {
+    public UserDTO(int userID, String userName, String phoneNumber, String roleID, String address, int accountID, boolean isDeleted) {
         this.userID = userID;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.roleID = roleID;
         this.address = address;
         this.accountID = accountID;
+        this.isDeleted = isDeleted;
     }
 
     public int getUserID() {

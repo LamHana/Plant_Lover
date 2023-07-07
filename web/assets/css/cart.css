@@ -68,7 +68,8 @@ thead {
     border-right: 1px solid #ebebeb;
 }
 
-.table-content table td.plantmore-product-remove {
+.table-content table td.plantmore-product-remove,
+td.user-remove {
     font-size: 20px;
 }
 
@@ -126,7 +127,8 @@ thead {
 
 .product-update input.button,
 .add-product input.button,
-.management-user input.button {
+.management-user input.button,
+.user-update input.button {
     background-color: #333;
     border: 0 none;
     border-radius: 2px;
@@ -197,7 +199,8 @@ a:hover {
 
 .product-update input.button:hover,
 .add-product input.button:hover,
-.management-user input.button:hover {
+.management-user input.button:hover,
+.user-update input.button:hover {
     background: #abd373;
 }
 
