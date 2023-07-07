@@ -59,6 +59,14 @@ public class MainController extends HttpServlet {
     private static final String MANAGE_PRODUCT_CONTROLLER = "ProductController";
     private static final String MANAGE_USER = "Management User";
     private static final String MANAGE_USER_CONTROLLER = "UserController";
+    private static final String UPDATE_USER = "Update User";
+    private static final String UPDATE_USER_CONTROLLER = "UpdateUserController";
+    private static final String REMOVE_USER = "RemoveUser";
+    private static final String REMOVE_USER_CONTROLLER = "RemoveUserController";
+    private static final String SEARCH_PRODUCT = "SearchProduct";
+    private static final String SEARCH_PRODUCT_CONTROLLER = "ProductController";
+    private static final String SEARCH_USER = "SearchUser";
+    private static final String SEARCH_USER_CONTROLLER = "UserController";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -110,6 +118,14 @@ public class MainController extends HttpServlet {
                 url = MANAGE_PRODUCT_CONTROLLER;
             } else if (MANAGE_USER.equals(action)) {
                 url = MANAGE_USER_CONTROLLER;
+            } else if (UPDATE_USER.equals(action)) {
+                url = UPDATE_USER_CONTROLLER;
+            } else if (REMOVE_USER.equals(action)) {
+                url = REMOVE_USER_CONTROLLER;
+            } else if (SEARCH_PRODUCT.equals(action)) {
+                url = SEARCH_PRODUCT_CONTROLLER;
+            } else if (SEARCH_USER.equals(action)) {
+                url = SEARCH_USER_CONTROLLER;
             }
         } catch (Exception e) {
             log("Error ay MainController: " + e.toString());

@@ -19,6 +19,9 @@ import utils.DBUtils;
  */
 public class UserDAO {
     private static final String USER = "EXEC GetUserList ?, ?, ?";
+    private static final String UPDATE = "UPDATE UserTb SET userName=?, roleID=?, phoneNumber=?, address=? WHERE userID=?";
+    private static final String REMOVE = "UPDATE UserTb SET isDeleted=? WHERE userID=?";
+    
     public List<UserDTO> getListUser(String search, int offset, int size) throws SQLException {
         List<UserDTO> list = new ArrayList<>();
         Connection conn = null;
@@ -58,5 +61,69 @@ public class UserDAO {
 
         }
         return list;
+    }
+
+    public boolean update(UserDTO user) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UPDATE);
+                ptm.setString(1, user.getUserName());
+                ptm.setString(2, user.getRoleID());
+                ptm.setString(3, user.getPhoneNumber());
+                ptm.setString(4, user.getAddress());
+                ptm.setInt(5, user.getUserID());
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+    }
+            return check;
+    }
+
+    public boolean delete(int userID) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+//        ResultSet rs = null;
+        try {
+//           code 
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(REMOVE);
+                ptm.setString(1, "True");
+                ptm.setInt(2, userID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+//            if (rs != null) {
+//                rs.close();
+//            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
     }
 }

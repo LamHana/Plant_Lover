@@ -65,6 +65,28 @@
         </div>
       </div>
     </c:if>
+
+    <!-- Search start -->
+    <div class="container">
+      <div class="row mb-35">
+        <div class="col-md-4 search-dropdown">
+          <form action="MainController">
+            <input
+              name="search"
+              id="search"
+              placeholder="Search"
+              value="${param.search}"
+              type="text"
+            />
+            <button type="submit" name="action" value="SearchUser">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Search end -->
+
     <!-- Shopping cart start -->
     <div class="Shopping-cart-area mb-35">
       <div class="container">
@@ -202,7 +224,9 @@
         <ul>
           <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
             <li class="product-pagination__page">
-              <a href="UserController?offset=${i}">${i}</a>
+              <a href="UserController?offset=${i}&search=${param.search}"
+                >${i}</a
+              >
             </li>
           </c:forEach>
           <li>

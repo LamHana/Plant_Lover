@@ -65,6 +65,61 @@
         </div>
       </div>
     </c:if>
+    <!-- Search start -->
+    <div class="container">
+      <div class="row mb-3 justify-content-between align-items-center">
+        <div class="col-md-4 search-dropdown">
+          <form action="MainController">
+            <input
+              name="search"
+              id="search"
+              placeholder="Search"
+              value="${param.search}"
+              type="text"
+            />
+            <button type="submit" name="action" value="SearchProduct">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <div class="col-md-2">
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle d-flex align-items-center justify-content-center"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <c:if test="${not empty param.category}">
+                ${param.category}
+              </c:if>
+              <c:if test="${empty param.category}"> Category </c:if>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a
+                class="dropdown-item"
+                href="ProductController?category=&search=${param.search}"
+                >All plants</a
+              >
+              <c:forEach
+                var="categoryKey"
+                varStatus="counter"
+                items="${sessionScope.LIST_CATEGORY.keySet()}"
+              >
+                <a
+                  class="dropdown-item"
+                  href="ProductController?category=${sessionScope.LIST_CATEGORY.get(categoryKey)}&search=${param.search}"
+                  >${sessionScope.LIST_CATEGORY.get(categoryKey)}</a
+                >
+              </c:forEach>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Search end -->
     <!-- Shopping cart start -->
     <div class="Shopping-cart-area mb-35">
       <div class="container">
@@ -218,7 +273,9 @@
         <ul>
           <c:forEach begin="1" end="${requestScope.PAGE_SIZE}" var="i">
             <li class="product-pagination__page">
-              <a href="ProductController?offset=${i}">${i}</a>
+              <a href="ProductController?offset=${i}&search=${param.search}"
+                >${i}</a
+              >
             </li>
           </c:forEach>
           <li>
